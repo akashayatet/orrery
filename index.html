@@ -22,7 +22,8 @@
   <link rel="stylesheet" href="styles/normalize.css" type="text/css">
   <link rel="stylesheet" href="styles/global.css" type="text/css">
 
-  <!-- Preloads -->
+  <!-- Global Preloads -->
+  <link rel="preload" href="libs/require.js" as="script">
   <link rel="preload" href="https://unpkg.com/tone@14.7.77/build/Tone.js" as="script">
   <link rel="preload" href="https://unpkg.com/phaser@3.52.0/dist/phaser.js" as="script">
   <link rel="preload" href="https://unpkg.com/matter-js@0.16.1/build/matter.js" as="script">
@@ -31,14 +32,20 @@
 
 <body>
   <!-- Main Mindfield -->
-  <canvas id="Mindfield">:({·°·}):</canvas>
+  <!-- <canvas id="mindfield">:({·°·}):</canvas> -->
 
-  <!-- Libraries & Scripts -->
+  <!-- Global Libraries & Scripts -->
   <script src="libs/modernizr-3.11.4.min.js"></script>
   <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
   <script src="https://unpkg.com/phaser@3.52.0/dist/phaser.js"></script>
   <script src="https://unpkg.com/matter-js@0.16.1/build/matter.js"></script>
   <script src="https://unpkg.com/brain.js@2.0.0-beta.2/dist/brain-browser.min.js"></script>
+  
+  <!-- Specific Library Scripts -->
+  <script src="scripts/filters/LightBeam.js"></script>
+  <script src="libs/require.js"></script>
+
+  <!-- Core Code -->
   <script src="scripts/main.js"></script>
 </body>
 
