@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
 
     // Constants
-    const A_ALIAS = 1       /* Anti-aliasing */
+    const A_ALIAS = 1       /* Anti-aliasing Preference */
     const PROTOGLYPH = {    /* Constellation Approximation & Codex Addressing */
         /* Duo-Symmetrics (Position and Orientation Dominant) */
         RA: '\.', EL: '\:', IA: '\|',
@@ -34,6 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Generate scene
     const createScene = () => {
         let scene = new BABYLON.Scene(engine)
+        console.debug('}•{')
     }
     createScene()
 })
