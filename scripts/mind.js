@@ -1,25 +1,27 @@
 window.addEventListener('DOMContentLoaded', () => {
 
     // Constants
-    const A_ALIAS = 1
-    const PROTOGLYPH = {
-        /* Omni Symmetrics */
-        BA: '\.', EL: '\:', IA: '\|',
-        QU: '\°', UR: '\•', ET: '\~',
-        VeK: '\'', TaR: '\"', GaTH: '\=',
+    const A_ALIAS = 1       /* Anti-aliasing */
+    const PROTOGLYPH = {    /* Constellation Approximation & Codex Addressing */
+        /* Duo-Symmetrics (Position and Orientation Dominant) */
+        RA: '\.', EL: '\:', IA: '\|',
+        QU: '\°', UR: '\•', ET: '\=',
 
-        /* Uni Symmetrics S = sun | M = moon */
+        /* Non-Symmetrics (Orientation Dominant) */
+        VeK: '\/', TaR: '\\', GaTH: '\~',
+
+        /* Uni-Symmetrics (S = sun | M = moon ::: Position Dominant) */
         NY: {S: '\}', M: '\{'}, 
         OM: {S: '\)', M: '\('}, 
         VU: {S: '\]', M: '\['},
     }
-    let o = PROTOGLYPH.OM.S
-    let m = PROTOGLYPH.OM.M
     let e = PROTOGLYPH.GaTH
-    let q = PROTOGLYPH.EL
-    console.debug(`ProtoGlyph Check (oeqem): ${o}${e}${q}${e}${m}`)
+    let m = PROTOGLYPH.OM.M
+    let o = PROTOGLYPH.OM.S
+    let q = PROTOGLYPH.QU
+    console.debug(`ProtoGlyph Check /.\\ ${o}${e}${q}${e}${m}`)
 
-    
+
     // Locate the mindfield
     const mField = document.getElementById('mindfield')
     mField.width = window.innerWidth
@@ -30,4 +32,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const engine = new BABYLON.Engine(mField, A_ALIAS)
 
     // Generate scene
+    const createScene = () => {
+        let scene = new BABYLON.Scene(engine)
+    }
+    createScene()
 })
