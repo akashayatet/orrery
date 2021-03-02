@@ -19,25 +19,27 @@
   <!-- <link rel="apple-touch-icon" href="icon.png"> -->
   <!-- Place favicon.ico in the root directory -->
 
-  <link rel="stylesheet" href="src/css/normalize.css" type="text/css">
-  <link rel="stylesheet" href="src/css/global.css" type="text/css">
+  <link rel="stylesheet" href="styles/normalize.css" type="text/css">
+  <link rel="stylesheet" href="styles/global.css" type="text/css">
 
   <!-- Preloads -->
-  <link rel="preload" href="https://unpkg.com/pixi.js" as="script">
-  <link rel="preload" href="https://unpkg.com/tone" as="script">
-  <link rel="preload" href="https://unpkg.com/brain.js" as="script">
-  <link rel="preload" href="https://unpkg.com/matter-js" as="script">
-  
+  <link rel="preload" href="https://unpkg.com/tone@14.7.77/build/Tone.js" as="script">
+  <link rel="preload" href="https://unpkg.com/phaser@3.52.0/dist/phaser.js" as="script">
+  <link rel="preload" href="https://unpkg.com/matter-js@0.16.1/build/matter.js" as="script">
+  <link rel="preload" href="https://unpkg.com/brain.js@2.0.0-beta.2/dist/brain-browser.min.js" as="script">
 </head>
 
 <body>
   <!-- Main Mindfield -->
-  <p>:({·°·}):</p>
-  
-  <!-- Packages & Scripts -->
-  <script src="packages/modernizr-3.11.4.min.js"></script>
-  <script src="https://unpkg.com/brain.js"></script>
-  <script src="src/js/main.js"></script>
+  <canvas id="Mindfield">:({·°·}):</canvas>
+
+  <!-- Libraries & Scripts -->
+  <script src="libs/modernizr-3.11.4.min.js"></script>
+  <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
+  <script src="https://unpkg.com/phaser@3.52.0/dist/phaser.js"></script>
+  <script src="https://unpkg.com/matter-js@0.16.1/build/matter.js"></script>
+  <script src="https://unpkg.com/brain.js@2.0.0-beta.2/dist/brain-browser.min.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
 
 </html>
