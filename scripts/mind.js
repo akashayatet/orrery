@@ -34,7 +34,23 @@ window.addEventListener('DOMContentLoaded', () => {
     // Generate scene
     const createScene = () => {
         let scene = new BABYLON.Scene(engine)
+        scene.clearColor = new BABYLON.Color3.White()
+
+        const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 10, 0), scene)
+        // This targets the eye to scene origin
+        eye.setTarget(BABYLON.Vector3.Zero())
+
+        const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 2, segments: 32}, scene);
+        sphere.position.y = 1
+
         console.debug('}•{')
+        return scene
     }
-    createScene()
+    
+    // Actually generate scene
+    let lField = createScene()
+
+    engine.runRenderLoop(() => {
+        lField.render()
+      })
 })
