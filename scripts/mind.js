@@ -53,13 +53,46 @@ window.addEventListener('DOMContentLoaded', () => {
         // Atet Maxim Toreus - (M):::(C):::(Y):::({W})
         const wToreus = BABYLON.MeshBuilder.CreateTorus('wToreus', TOREUS_GEO, scene)
         wToreus.position.y = 1
-
+        wToreus.position.x = 0
         const toreusWhite = new BABYLON.StandardMaterial(scene)
         toreusWhite.wireframe = 1
         toreusWhite.WireFrameFillMode = 0
-        toreusWhite.alpha = 0.05
+        toreusWhite.alpha = 0.75
         toreusWhite.emissiveColor = new BABYLON.Color3.White()
         wToreus.material = toreusWhite
+
+        // Aura Maxim Toreus
+        const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS_GEO, scene)
+        aToreus.position.y = 1
+        aToreus.position.x = 0
+        const toreusYellow = new BABYLON.StandardMaterial(scene)
+        toreusYellow.wireframe = 1
+        toreusYellow.WireFrameFillMode = 0
+        toreusYellow.alpha = 0.010
+        toreusYellow.emissiveColor = new BABYLON.Color3.Yellow()
+        aToreus.material = toreusYellow
+
+        // Cryo Maxium Toreus
+        const cToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS_GEO, scene)
+        cToreus.position.y = 1
+        cToreus.position.x = -0.03
+        const toreusTeal = new BABYLON.StandardMaterial(scene)
+        toreusTeal.wireframe = 1
+        toreusTeal.WireFrameFillMode = 0
+        toreusTeal.alpha = 0.09
+        toreusTeal.emissiveColor = new BABYLON.Color3.Teal()
+        cToreus.material = toreusTeal
+
+        // Pyro Maxim Toreus
+        const pToreus = BABYLON.MeshBuilder.CreateTorus('pToreus', TOREUS_GEO, scene)
+        pToreus.position.y = 1
+        pToreus.position.x = 0.03
+        const toreusMagenta = new BABYLON.StandardMaterial(scene)
+        toreusMagenta.wireframe = 1
+        toreusMagenta.WireFrameFillMode = 0
+        toreusMagenta.alpha = 0.12
+        toreusMagenta.emissiveColor = new BABYLON.Color3.Magenta()
+        pToreus.material = toreusMagenta
 
         // Aura Maxim Sphera - (M):::(C):::({Y}):::(W)
         // const ySphera = SPHERA_GEN('ySphera', scene)
