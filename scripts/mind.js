@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Generate scene
     const createScene = () => {
         let scene = new BABYLON.Scene(engine)
-        scene.clearColor = new BABYLON.Color3.White()
+        scene.clearColor = new BABYLON.Color3.Black()
 
         // TargetCamera and sphere shapes produce the pseudo-2D top-down view of circles
         const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 10, 0), scene)
@@ -44,12 +44,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 2, segments: 32}, scene);
         sphere.position.y = 1
-
+        
         // My attempt to color the sphere
-        var material = new BABYLON.StandardMaterial(scene);
-        material.alpha = 1;
-        material.diffuseColor = new BABYLON.Color3(1.0, 0.2, 0.7);
-        sphere.material = material; // <--
+        const material = new BABYLON.StandardMaterial(scene)
+        material.emissiveColor = new BABYLON.Color3.White()
+        material.wireframe = 1
+        sphere.material = material
 
 
         console.debug('}•{')
@@ -58,6 +58,11 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Actually generate scene
     let lField = createScene()
+    console.debug(lField)
+
+    // Experiments
+    // Ambient Color
+    lField.ambientColor.r = 256
 
     engine.runRenderLoop(() => {
         lField.render()
