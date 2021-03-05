@@ -3,9 +3,12 @@ window.addEventListener('DOMContentLoaded', () => {
     // Constants
     const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
     const A_ALIAS = 1       /* Anti-aliasing Preference */
+    const COMPLEXITY = 72   /* Tesselations of the Torai and Segments of the Sphera */
+    const DIA_A = 5         /* Alpha Diameter */
+    const DOPPLER = 0.09    /* Anaglyph Red/Blue shift intensity */
     const PROTOGLYPH = {    /* Constellation Approximation & Codex Addressing */
         /* Duo-Symmetrics (Position and Orientation Dominant) */
-        RA: '\.', EL: '\:', IA: '\|',
+        BA: '\.', EL: '\:', IA: '\|',
         QU: '\°', UR: '\•', ET: '\=',
 
         /* Non-Symmetrics (Orientation Dominant) */
@@ -16,20 +19,20 @@ window.addEventListener('DOMContentLoaded', () => {
         OM: {S: '\)', M: '\('}, 
         VU: {S: '\]', M: '\['},
     }
-    let e = PROTOGLYPH.GaTH
-    let m = PROTOGLYPH.OM.M
-    let o = PROTOGLYPH.OM.S
-    let q = PROTOGLYPH.QU
-    console.debug(`ProtoGlyph Check /.\\ ${o}${e}${q}${e}${m}`)
-    console.debug(`45 degrees in radians is ${RAD(45)}`)
     const TOREUS_GEO = {
-        diameter: 2,
-        thickness: 0.25,
-        tessellation: 72
+        diameter: DIA_A,
+        thickness: RAD(DIA_A),          /* Should equally match Rayarc bandwidths */
+        tessellation: COMPLEXITY        /* Tesselations will also affect color depth */
     }
-    const SPHERA_GEO = {diameter: 2, segments: 32}
+    const SPHERA_GEO = {
+        diameter: COMPLEXITY % DIA_A,   /* Should be sized to match a subset ratio of a Toreus boundary */
+        segments: COMPLEXITY
+    }
+    const RAYARC_GEO = {                /* Hybrid geometry of a Ray and Arc|Curve */
 
-    // Locate the mindfield
+    }
+
+    // Target the mindfield
     const mField = document.getElementById('mindfield')
     mField.width = window.innerWidth
     mField.height = window.innerHeight
@@ -48,51 +51,52 @@ window.addEventListener('DOMContentLoaded', () => {
         // This targets the eye to scene origin
         eye.setTarget(BABYLON.Vector3.Zero())
 
-        // Generate the Toreus & Spheras
+        // Generate the Rayarc, Toreus & Spheras for the Ayat
+        /* THE AYAT * The sun and moon aspects of the three elements; the organs of the atet.
+         * {BLCK} :~: WHTE :~: Blue • Teal • White • Yellow • Magenta • Purple
+         */
         
-        // Atet Maxim Toreus - (M):::(C):::(Y):::({W})
+        // Akali Atet Toreus - Black / Death
+        const nToreus = BABYLON.MeshBuilder.CreateTorus('nToreus', TOREUS_GEO, scene)
+        nToreus.position.y = 1
+        nToreus.position.x = 0
+        const toreusBlack = new BABYLON.StandardMaterial(scene)
+
+        // Akosh Atet Toreus - White / Life
         const wToreus = BABYLON.MeshBuilder.CreateTorus('wToreus', TOREUS_GEO, scene)
         wToreus.position.y = 1
         wToreus.position.x = 0
         const toreusWhite = new BABYLON.StandardMaterial(scene)
-        toreusWhite.wireframe = 1
-        toreusWhite.WireFrameFillMode = 0
         toreusWhite.alpha = 0.75
         toreusWhite.emissiveColor = new BABYLON.Color3.White()
         wToreus.material = toreusWhite
-
-        // Aura Maxim Toreus
+        // Aura Atet Toreus - Yellow / Air
         const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS_GEO, scene)
         aToreus.position.y = 1
         aToreus.position.x = 0
         const toreusYellow = new BABYLON.StandardMaterial(scene)
-        toreusYellow.wireframe = 1
-        toreusYellow.WireFrameFillMode = 0
         toreusYellow.alpha = 0.010
         toreusYellow.emissiveColor = new BABYLON.Color3.Yellow()
         aToreus.material = toreusYellow
-
-        // Cryo Maxium Toreus
+        // Cryo Atet Toreus - Blue / Water
+        // Zero Atet Toreus - Teal / Vaccuum
         const cToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS_GEO, scene)
         cToreus.position.y = 1
-        cToreus.position.x = -0.03
+        cToreus.position.x = -DOPPLER
         const toreusTeal = new BABYLON.StandardMaterial(scene)
-        toreusTeal.wireframe = 1
-        toreusTeal.WireFrameFillMode = 0
         toreusTeal.alpha = 0.09
         toreusTeal.emissiveColor = new BABYLON.Color3.Teal()
         cToreus.material = toreusTeal
 
-        // Pyro Maxim Toreus
+        // Pyro Atet Toreus - Magenta / Fire
         const pToreus = BABYLON.MeshBuilder.CreateTorus('pToreus', TOREUS_GEO, scene)
         pToreus.position.y = 1
-        pToreus.position.x = 0.03
+        pToreus.position.x = +DOPPLER
         const toreusMagenta = new BABYLON.StandardMaterial(scene)
-        toreusMagenta.wireframe = 1
-        toreusMagenta.WireFrameFillMode = 0
         toreusMagenta.alpha = 0.12
         toreusMagenta.emissiveColor = new BABYLON.Color3.Magenta()
         pToreus.material = toreusMagenta
+        // Azon Atet Toreus - Purple / Chaos
 
         // Aura Maxim Sphera - (M):::(C):::({Y}):::(W)
         // const ySphera = SPHERA_GEN('ySphera', scene)
