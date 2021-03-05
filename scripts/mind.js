@@ -3,15 +3,15 @@ window.addEventListener('DOMContentLoaded', () => {
     // Constants
     const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
     const A_ALIAS = 1       /* Anti-aliasing Preference */
-    const COMPLEXITY = 27   /* Tesselations of the Torai and Segments of the Sphera */
+    const COMPLEXITY = 72   /* Tesselations of the Torai and Segments of the Sphera */
     const SUPERPOS = 1      /* Y Axis Superposition value */
-    const DIA_A = 3         /* Alpha Diameter */
+    const DIA_A = 2         /* Alpha Diameter */
     const DOPPLER = 0.0    /* Anaglyph Red/Blue shift intensity */
     const SINGULARITY = 0   /* The heart of all things */
     const MERKABA = {       /* Alpha Values for each MerKahBah Spectrum Band */
         BLCK: {
-            ALPHA: 0.00,
-            COLOR: new BABYLON.Color3.Black()
+            ALPHA: 1.00,
+            COLOR: new BABYLON.Color3.Purple()
         },
         WHTE: {
             ALPHA: 1.00,
@@ -31,11 +31,11 @@ window.addEventListener('DOMContentLoaded', () => {
         },
         MGNT: {
             ALPHA: 1.00,
-            COLOR: new BABYLON.Color3.Magenta()
+            COLOR: new BABYLON.Color3.Red()
         },
         PURP: {
             ALPHA: 1.00,
-            COLOR: new BABYLON.Color3.Purple()
+            COLOR: new BABYLON.Color3.Magenta()
         }
     }
     const PROTOGLYPH = {    /* Constellation Approximation & Codex Addressing */
@@ -53,11 +53,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     const TOREUS_GEO = {
         diameter: DIA_A,
-        thickness: RAD(DIA_A),          /* Should equally match Rayarc bandwidths */
+        thickness: RAD(DIA_A)*2,          /* Should equally match Rayarc bandwidths */
         tessellation: COMPLEXITY        /* Tesselations will also affect color depth */
     }
     const SPHERA_GEO = {
-        diameter: COMPLEXITY % DIA_A,   /* Should be sized to match a subset ratio of a Toreus boundary */
+        diameter: DIA_A*0.618,   /* Should be sized to match a subset ratio of a Toreus boundary */
         segments: COMPLEXITY
     }
     const RAYARC_GEO = {                /* Hybrid geometry of a Ray and Arc|Curve */
@@ -77,9 +77,9 @@ window.addEventListener('DOMContentLoaded', () => {
     let alphaRot = baseRot
     let betaRot = baseRot
     let gammaRot = baseRot
-    const subFactor3 = 1
-    const subFactor6 = 1
-    const subFactor9 = 1
+    const subFactor3 = 0.03
+    const subFactor6 = 0.06
+    const subFactor9 = 0.09
 
     // Generate scene
     const createScene = () => {
@@ -90,6 +90,21 @@ window.addEventListener('DOMContentLoaded', () => {
         const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 10, 0), scene)
         // This targets the eye to scene origin
         eye.setTarget(BABYLON.Vector3.Zero())
+
+        // Generate Protoglyphics
+        // Writer = BABYLON.MeshWriter(scene, {scale: 0.25, defaultFont: "Arial"});
+        // let gyrainbow  = new Writer( 
+        //         "}•{ {(GYRAINBOW)} ]|[",
+        //         {
+        //             "anchor": "center",
+        //             "letter-height": 50,
+        //             "color": "#1C3870",
+        //             "position": {
+        //                 "z": 20
+        //             }
+        //         }
+        //     );
+
 
         // Generate the Rayarc, Toreus & Spheras for the Ayat
         /* THE AYAT * The sun and moon aspects of the three elements; the organs of the atet.
@@ -188,7 +203,22 @@ window.addEventListener('DOMContentLoaded', () => {
         oToreus.material = toreusPurple // o is for oMEGA
 
         // Akali Sphera
-        // Akosh Sphera
+        const nSphera = BABYLON.MeshBuilder.CreateSphere('nSphera', SPHERA_GEO, scene)
+        nSphera.position.y = SUPERPOS
+        nSphera.position.x = SINGULARITY // Sphera don't have a rotation
+        const spheraBlack = new BABYLON.StandardMaterial(scene)
+        spheraBlack.alpha = MERKABA.BLCK.ALPHA
+        spheraBlack.emissiveColor = MERKABA.BLCK.COLOR // May need to be diffuseColor instead
+        nSphera.material = spheraBlack // n is for nULL
+
+        // Akosh Atet Sphera - White / Life
+        const gSphera = BABYLON.MeshBuilder.CreateSphere('gSphera', SPHERA_GEO, scene)
+        gSphera.position.y = SUPERPOS
+        gSphera.position.x = SINGULARITY // Sphera don't have a rotation
+        const spheraWhite = new BABYLON.StandardMaterial(scene)
+        spheraWhite.alpha = MERKABA.WHTE.ALPHA
+        spheraWhite.emissiveColor = MERKABA.WHTE.COLOR
+        gSphera.material = spheraWhite // g is for gAIA
 
         // Zon Sphera
         // Akali Rayarc
@@ -204,10 +234,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     engine.runRenderLoop(() => {
         // Iterate Rotations
-        const ROTVAL = 1
-        alphaRot += ROTVAL
-        // betaRot += ROTVAL
-        // gammaRot += ROTVAL
+        const ROTVAL = Math.PI
+        const ENTROPY = 1.618
+        alphaRot -= (ROTVAL / ENTROPY)
+        betaRot -= (ROTVAL / ENTROPY)
+        gammaRot -= (ROTVAL / ENTROPY)
     
         // Iterate Scene
         let lField = createScene()
