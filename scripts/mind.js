@@ -116,6 +116,11 @@ window.addEventListener('DOMContentLoaded', () => {
         // Zon Atet Toreus - Purple / Chaos / Transmutation
         const oToreus = BABYLON.MeshBuilder.CreateTorus('oToreus', TOREUS_GEO, scene)
         oToreus.position.y = SUPERPOS
+        oToreus.position.x = SINGULARITY+(DOPPLER+DOPPLER)
+        const toreusPurple = new BABYLON.StandardMaterial(scene)
+        toreusPurple.alpha = 0.12
+        toreusPurple.emissiveColor = new BABYLON.Color3.Purple()
+        oToreus.material = toreusPurple // o is for oMEGA
 
         // Akali Sphera
         // Akosh Sphera
