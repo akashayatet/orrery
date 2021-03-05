@@ -54,6 +54,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // Generate the Rayarc, Toreus & Spheras for the Ayat
         /* THE AYAT * The sun and moon aspects of the three elements; the organs of the atet.
          * {BLCK} :~: WHTE :~: Blue • Teal • White • Yellow • Magenta • Purple
+         * A.K.A. MerKahBah Spectrum
          */
         
         // Akali Atet Toreus - Black / Death
@@ -61,6 +62,9 @@ window.addEventListener('DOMContentLoaded', () => {
         nToreus.position.y = 1
         nToreus.position.x = 0
         const toreusBlack = new BABYLON.StandardMaterial(scene)
+        toreusBlack.alpha = 1.00
+        toreusBlack.emissiveColor = new BABYLON.Color3.Black() // May need to be diffuseColor instead
+        nToreus.material = toreusBlack // n is for nULL
 
         // Akosh Atet Toreus - White / Life
         const wToreus = BABYLON.MeshBuilder.CreateTorus('wToreus', TOREUS_GEO, scene)
@@ -70,7 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
         toreusWhite.alpha = 0.75
         toreusWhite.emissiveColor = new BABYLON.Color3.White()
         wToreus.material = toreusWhite
-        // Aura Atet Toreus - Yellow / Air
+        // Aura Atet Toreus - Yellow / Air / Subliminal
         const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS_GEO, scene)
         aToreus.position.y = 1
         aToreus.position.x = 0
@@ -78,8 +82,8 @@ window.addEventListener('DOMContentLoaded', () => {
         toreusYellow.alpha = 0.010
         toreusYellow.emissiveColor = new BABYLON.Color3.Yellow()
         aToreus.material = toreusYellow
-        // Cryo Atet Toreus - Blue / Water
-        // Zero Atet Toreus - Teal / Vaccuum
+        // Cryo Atet Toreus - Blue / Water / Darkness
+        // Zero Atet Toreus - Teal / Vaccuum / Plenum
         const cToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS_GEO, scene)
         cToreus.position.y = 1
         cToreus.position.x = -DOPPLER
@@ -88,7 +92,7 @@ window.addEventListener('DOMContentLoaded', () => {
         toreusTeal.emissiveColor = new BABYLON.Color3.Teal()
         cToreus.material = toreusTeal
 
-        // Pyro Atet Toreus - Magenta / Fire
+        // Pyro Atet Toreus - Magenta / Fire / Light
         const pToreus = BABYLON.MeshBuilder.CreateTorus('pToreus', TOREUS_GEO, scene)
         pToreus.position.y = 1
         pToreus.position.x = +DOPPLER
@@ -96,41 +100,16 @@ window.addEventListener('DOMContentLoaded', () => {
         toreusMagenta.alpha = 0.12
         toreusMagenta.emissiveColor = new BABYLON.Color3.Magenta()
         pToreus.material = toreusMagenta
-        // Azon Atet Toreus - Purple / Chaos
+        // Zon Atet Toreus - Purple / Chaos / Transmutation
 
-        // Aura Maxim Sphera - (M):::(C):::({Y}):::(W)
-        // const ySphera = SPHERA_GEN('ySphera', scene)
-        // ySphera.position.y = globalSpheraPosition.superpositionY + 2
-        // ySphera.position.x = globalSpheraPosition.fulcrumX - globalSpheraPosition.ecliptic
-        // const spheraYellow = new BABYLON.StandardMaterial(scene)
-        // spheraYellow.emissiveColor = new BABYLON.Color3.Yellow() // Yellowish
-        // spheraYellow.useEmissive = false
-        // ySphera.wireframe = 1
-        // ySphera.alpha = 0.50
-        // spheraYellow.alpha = 0.25
-        // ySphera.material = spheraYellow
+        // Akali Sphera
+        // Akosh Sphera
 
-        // Cryo Maxim Sphera - (M):::({C}):::(Y):::(W)
-        // const cSphera = SPHERA_GEN('cSphera', scene)
-        // cSphera.position.y = globalSpheraPosition.superpositionY + 3
-        // cSphera.position.x = globalSpheraPosition.blueshiftX
-        // const spheraCyan = new BABYLON.StandardMaterial(scene) 
-        // spheraCyan.emissiveColor = new BABYLON.Color3.Teal() // Tealish-Cyan
-        // cSphera.wireframe = 1
-        // cSphera.alpha = 256
-        // spheraCyan.alpha = 0.25
-        // cSphera.material = spheraCyan
+        // Zon Sphera
+        // Akali Rayarc
+        // Akosh Rayarc
 
-        // Pyro Maxim Sphera - ({M}):::(C):::(Y):::(W)
-        // const mSphera = SPHERA_GEN('mSphera', scene)
-        // mSphera.position.y = globalSpheraPosition.superpositionY + 4
-        // mSphera.position.x = globalSpheraPosition.redshiftX
-        // const spheraMagent = new BABYLON.StandardMaterial(scene) 
-        // spheraMagent.emissiveColor = new BABYLON.Color3.Magenta() // Magentlemandorlady
-        // mSphera.wireframe = 1
-        // mSphera.alpha = 0.25
-        // spheraMagent.alpha = 0.25
-        // mSphera.material = spheraMagent
+        // Zon Rayarc
 
         console.debug('}•{')
         return scene
