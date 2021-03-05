@@ -3,38 +3,38 @@ window.addEventListener('DOMContentLoaded', () => {
     // Constants
     const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
     const A_ALIAS = 1       /* Anti-aliasing Preference */
-    const COMPLEXITY = 144   /* Tesselations of the Torai and Segments of the Sphera */
+    const COMPLEXITY = 27   /* Tesselations of the Torai and Segments of the Sphera */
     const SUPERPOS = 1      /* Y Axis Superposition value */
-    const DIA_A = 5         /* Alpha Diameter */
-    const DOPPLER = 0.12    /* Anaglyph Red/Blue shift intensity */
+    const DIA_A = 3         /* Alpha Diameter */
+    const DOPPLER = 0.0    /* Anaglyph Red/Blue shift intensity */
     const SINGULARITY = 0   /* The heart of all things */
     const MERKABA = {       /* Alpha Values for each MerKahBah Spectrum Band */
         BLCK: {
-            ALPHA: 1.00,
+            ALPHA: 0.00,
             COLOR: new BABYLON.Color3.Black()
         },
         WHTE: {
-            ALPHA: 1.75,
+            ALPHA: 1.00,
             COLOR: new BABYLON.Color3.White()
         },
         YLLW: {
-            ALPHA: 1.010,
+            ALPHA: 1.00,
             COLOR: new BABYLON.Color3.Yellow()
         },
         BLUE: {
-            ALPHA: 1.12,
+            ALPHA: 1.00,
             COLOR: new BABYLON.Color3.Blue()
         },
         TEAL: {
-            ALPHA: 1.09,
+            ALPHA: 1.00,
             COLOR: new BABYLON.Color3.Teal()
         },
         MGNT: {
-            ALPHA: 1.12,
+            ALPHA: 1.00,
             COLOR: new BABYLON.Color3.Magenta()
         },
         PURP: {
-            ALPHA: 1.12,
+            ALPHA: 1.00,
             COLOR: new BABYLON.Color3.Purple()
         }
     }
@@ -72,6 +72,15 @@ window.addEventListener('DOMContentLoaded', () => {
     // Create GPU Engine
     const engine = new BABYLON.Engine(mField, A_ALIAS)
 
+    // Oscillation Tuning
+    const baseRot = 1
+    let alphaRot = baseRot
+    let betaRot = baseRot
+    let gammaRot = baseRot
+    const subFactor3 = 1
+    const subFactor6 = 1
+    const subFactor9 = 1
+
     // Generate scene
     const createScene = () => {
         let scene = new BABYLON.Scene(engine)
@@ -92,6 +101,11 @@ window.addEventListener('DOMContentLoaded', () => {
         const nToreus = BABYLON.MeshBuilder.CreateTorus('nToreus', TOREUS_GEO, scene)
         nToreus.position.y = SUPERPOS
         nToreus.position.x = SINGULARITY
+        nToreus.rotation = new BABYLON.Vector3(
+            alphaRot*subFactor3, 
+            betaRot*subFactor6, 
+            gammaRot*subFactor9
+        )
         const toreusBlack = new BABYLON.StandardMaterial(scene)
         toreusBlack.alpha = MERKABA.BLCK.ALPHA
         toreusBlack.emissiveColor = MERKABA.BLCK.COLOR // May need to be diffuseColor instead
@@ -101,6 +115,11 @@ window.addEventListener('DOMContentLoaded', () => {
         const gToreus = BABYLON.MeshBuilder.CreateTorus('gToreus', TOREUS_GEO, scene)
         gToreus.position.y = SUPERPOS
         gToreus.position.x = SINGULARITY
+        gToreus.rotation = new BABYLON.Vector3(
+            alphaRot*subFactor9, 
+            betaRot*subFactor6, 
+            gammaRot*subFactor3
+        )
         const toreusWhite = new BABYLON.StandardMaterial(scene)
         toreusWhite.alpha = MERKABA.WHTE.ALPHA
         toreusWhite.emissiveColor = MERKABA.WHTE.COLOR
@@ -110,6 +129,11 @@ window.addEventListener('DOMContentLoaded', () => {
         const mToreus = BABYLON.MeshBuilder.CreateTorus('mToreus', TOREUS_GEO, scene)
         mToreus.position.y = SUPERPOS
         mToreus.position.x = SINGULARITY
+        mToreus.rotation = new BABYLON.Vector3(
+            alphaRot*subFactor3, 
+            betaRot*subFactor3, 
+            gammaRot*subFactor3
+        )
         const toreusYellow = new BABYLON.StandardMaterial(scene)
         toreusYellow.alpha = MERKABA.YLLW.ALPHA
         toreusYellow.emissiveColor = MERKABA.YLLW.COLOR
@@ -119,6 +143,11 @@ window.addEventListener('DOMContentLoaded', () => {
         const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS_GEO, scene)
         aToreus.position.y = SUPERPOS
         aToreus.position.x = SINGULARITY-(DOPPLER+DOPPLER)
+        aToreus.rotation = new BABYLON.Vector3(
+            alphaRot*subFactor6, 
+            betaRot*subFactor6, 
+            gammaRot*subFactor6
+        )
         const toreusBlue = new BABYLON.StandardMaterial(scene)
         toreusBlue.alpha = MERKABA.BLUE.ALPHA
         toreusBlue.emissiveColor = MERKABA.BLUE.COLOR
@@ -128,6 +157,11 @@ window.addEventListener('DOMContentLoaded', () => {
         const zToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS_GEO, scene)
         zToreus.position.y = SUPERPOS
         zToreus.position.x = SINGULARITY-DOPPLER
+        zToreus.rotation = new BABYLON.Vector3(
+            alphaRot*subFactor9, 
+            betaRot*subFactor9, 
+            gammaRot*subFactor9
+        )
         const toreusTeal = new BABYLON.StandardMaterial(scene)
         toreusTeal.alpha = MERKABA.TEAL.ALPHA
         toreusTeal.emissiveColor = MERKABA.TEAL.COLOR
@@ -137,6 +171,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const pToreus = BABYLON.MeshBuilder.CreateTorus('pToreus', TOREUS_GEO, scene)
         pToreus.position.y = SUPERPOS
         pToreus.position.x = SINGULARITY+DOPPLER
+        pToreus.rotation = new BABYLON.Vector3(alphaRot*subFactor9, betaRot*subFactor3, gammaRot*subFactor6)
         const toreusMagenta = new BABYLON.StandardMaterial(scene)
         toreusMagenta.alpha = MERKABA.MGNT.ALPHA
         toreusMagenta.emissiveColor = MERKABA.MGNT.COLOR
@@ -146,6 +181,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const oToreus = BABYLON.MeshBuilder.CreateTorus('oToreus', TOREUS_GEO, scene)
         oToreus.position.y = SUPERPOS
         oToreus.position.x = SINGULARITY+(DOPPLER+DOPPLER)
+        oToreus.rotation = new BABYLON.Vector3(alphaRot*subFactor6, betaRot*subFactor3, gammaRot*subFactor9)
         const toreusPurple = new BABYLON.StandardMaterial(scene)
         toreusPurple.alpha = MERKABA.PURP.ALPHA
         toreusPurple.emissiveColor = MERKABA.PURP.COLOR
@@ -160,17 +196,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // Zon Rayarc
 
-        console.debug('}•{')
         return scene
     }
     
-    // Actually generate scene
-    let lField = createScene()
-    console.debug(lField)
-
     // Experiments...
+    console.debug('}•{')
 
     engine.runRenderLoop(() => {
+        // Iterate Rotations
+        const ROTVAL = 1
+        alphaRot += ROTVAL
+        // betaRot += ROTVAL
+        // gammaRot += ROTVAL
+    
+        // Iterate Scene
+        let lField = createScene()
+        // console.debug(lField)
         lField.render()
       })
 })
