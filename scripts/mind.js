@@ -22,6 +22,12 @@ window.addEventListener('DOMContentLoaded', () => {
     let q = PROTOGLYPH.QU
     console.debug(`ProtoGlyph Check /.\\ ${o}${e}${q}${e}${m}`)
     console.debug(`45 degrees in radians is ${RAD(45)}`)
+    const TOREUS_GEO = {
+        diameter: 2,
+        thickness: 0.25,
+        tessellation: 72
+    }
+    const SPHERA_GEO = {diameter: 2, segments: 32}
 
     // Locate the mindfield
     const mField = document.getElementById('mindfield')
@@ -42,15 +48,52 @@ window.addEventListener('DOMContentLoaded', () => {
         // This targets the eye to scene origin
         eye.setTarget(BABYLON.Vector3.Zero())
 
-        const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 2, segments: 32}, scene);
-        sphere.position.y = 1
+        // Generate the Toreus & Spheras
         
-        // My attempt to color the sphere
-        const material = new BABYLON.StandardMaterial(scene)
-        material.emissiveColor = new BABYLON.Color3.White()
-        material.wireframe = 1
-        sphere.material = material
+        // Atet Maxim Toreus - (M):::(C):::(Y):::({W})
+        const wToreus = BABYLON.MeshBuilder.CreateTorus('wToreus', TOREUS_GEO, scene)
+        wToreus.position.y = 1
 
+        const toreusWhite = new BABYLON.StandardMaterial(scene)
+        toreusWhite.wireframe = 1
+        toreusWhite.WireFrameFillMode = 0
+        toreusWhite.alpha = 0.05
+        toreusWhite.emissiveColor = new BABYLON.Color3.White()
+        wToreus.material = toreusWhite
+
+        // Aura Maxim Sphera - (M):::(C):::({Y}):::(W)
+        // const ySphera = SPHERA_GEN('ySphera', scene)
+        // ySphera.position.y = globalSpheraPosition.superpositionY + 2
+        // ySphera.position.x = globalSpheraPosition.fulcrumX - globalSpheraPosition.ecliptic
+        // const spheraYellow = new BABYLON.StandardMaterial(scene)
+        // spheraYellow.emissiveColor = new BABYLON.Color3.Yellow() // Yellowish
+        // spheraYellow.useEmissive = false
+        // ySphera.wireframe = 1
+        // ySphera.alpha = 0.50
+        // spheraYellow.alpha = 0.25
+        // ySphera.material = spheraYellow
+
+        // Cryo Maxim Sphera - (M):::({C}):::(Y):::(W)
+        // const cSphera = SPHERA_GEN('cSphera', scene)
+        // cSphera.position.y = globalSpheraPosition.superpositionY + 3
+        // cSphera.position.x = globalSpheraPosition.blueshiftX
+        // const spheraCyan = new BABYLON.StandardMaterial(scene) 
+        // spheraCyan.emissiveColor = new BABYLON.Color3.Teal() // Tealish-Cyan
+        // cSphera.wireframe = 1
+        // cSphera.alpha = 256
+        // spheraCyan.alpha = 0.25
+        // cSphera.material = spheraCyan
+
+        // Pyro Maxim Sphera - ({M}):::(C):::(Y):::(W)
+        // const mSphera = SPHERA_GEN('mSphera', scene)
+        // mSphera.position.y = globalSpheraPosition.superpositionY + 4
+        // mSphera.position.x = globalSpheraPosition.redshiftX
+        // const spheraMagent = new BABYLON.StandardMaterial(scene) 
+        // spheraMagent.emissiveColor = new BABYLON.Color3.Magenta() // Magentlemandorlady
+        // mSphera.wireframe = 1
+        // mSphera.alpha = 0.25
+        // spheraMagent.alpha = 0.25
+        // mSphera.material = spheraMagent
 
         console.debug('}•{')
         return scene
@@ -60,9 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let lField = createScene()
     console.debug(lField)
 
-    // Experiments
-    // Ambient Color
-    lField.ambientColor.r = 256
+    // Experiments...
 
     engine.runRenderLoop(() => {
         lField.render()
