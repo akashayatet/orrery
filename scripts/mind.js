@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const SUPERPOS = 1      /* Y Axis Superposition value */
     const DIA_A = 5         /* Alpha Diameter */
     const DOPPLER = 0.09    /* Anaglyph Red/Blue shift intensity */
+    const SINGULARITY = 0   /* The heart of all things */
     const PROTOGLYPH = {    /* Constellation Approximation & Codex Addressing */
         /* Duo-Symmetrics (Position and Orientation Dominant) */
         BA: '\.', EL: '\:', IA: '\|',
@@ -61,7 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // Akali Atet Toreus - Black / Death
         const nToreus = BABYLON.MeshBuilder.CreateTorus('nToreus', TOREUS_GEO, scene)
         nToreus.position.y = SUPERPOS
-        nToreus.position.x = 0
+        nToreus.position.x = SINGULARITY
         const toreusBlack = new BABYLON.StandardMaterial(scene)
         toreusBlack.alpha = 0.00
         toreusBlack.emissiveColor = new BABYLON.Color3.Black() // May need to be diffuseColor instead
@@ -70,7 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // Akosh Atet Toreus - White / Life
         const gToreus = BABYLON.MeshBuilder.CreateTorus('gToreus', TOREUS_GEO, scene)
         gToreus.position.y = SUPERPOS
-        gToreus.position.x = 0
+        gToreus.position.x = SINGULARITY
         const toreusWhite = new BABYLON.StandardMaterial(scene)
         toreusWhite.alpha = 0.75
         toreusWhite.emissiveColor = new BABYLON.Color3.White()
@@ -79,7 +80,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // Aura Atet Toreus - Yellow / Air / Subliminal
         const mToreus = BABYLON.MeshBuilder.CreateTorus('mToreus', TOREUS_GEO, scene)
         mToreus.position.y = SUPERPOS
-        mToreus.position.x = 0
+        mToreus.position.x = SINGULARITY
         const toreusYellow = new BABYLON.StandardMaterial(scene)
         toreusYellow.alpha = 0.010
         toreusYellow.emissiveColor = new BABYLON.Color3.Yellow()
@@ -88,30 +89,33 @@ window.addEventListener('DOMContentLoaded', () => {
         // Cryo Atet Toreus - Blue / Water / Darkness
         const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS_GEO, scene)
         aToreus.position.y = SUPERPOS
-        aToreus.position.x = 0
+        aToreus.position.x = SINGULARITY-(DOPPLER+DOPPLER)
         const toreusBlue = new BABYLON.StandardMaterial(scene)
-        toreusBlue.alpha = 0.50
+        toreusBlue.alpha = 0.12
         toreusBlue.emissiveColor = new BABYLON.Color3.Blue()
         aToreus.material = toreusBlue // a is for aBYSS
-        
+
         // Zero Atet Toreus - Teal / Vaccuum / Plenum
-        const cToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS_GEO, scene)
-        cToreus.position.y = 1
-        cToreus.position.x = -DOPPLER
+        const zToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS_GEO, scene)
+        zToreus.position.y = SUPERPOS
+        zToreus.position.x = SINGULARITY-DOPPLER
         const toreusTeal = new BABYLON.StandardMaterial(scene)
         toreusTeal.alpha = 0.09
         toreusTeal.emissiveColor = new BABYLON.Color3.Teal()
-        cToreus.material = toreusTeal
+        zToreus.material = toreusTeal // z is for zERO-POINT
 
         // Pyro Atet Toreus - Magenta / Fire / Light
         const pToreus = BABYLON.MeshBuilder.CreateTorus('pToreus', TOREUS_GEO, scene)
-        pToreus.position.y = 1
-        pToreus.position.x = +DOPPLER
+        pToreus.position.y = SUPERPOS
+        pToreus.position.x = SINGULARITY+DOPPLER
         const toreusMagenta = new BABYLON.StandardMaterial(scene)
         toreusMagenta.alpha = 0.12
         toreusMagenta.emissiveColor = new BABYLON.Color3.Magenta()
-        pToreus.material = toreusMagenta
+        pToreus.material = toreusMagenta // p is for pLASMA
+
         // Zon Atet Toreus - Purple / Chaos / Transmutation
+        const oToreus = BABYLON.MeshBuilder.CreateTorus('oToreus', TOREUS_GEO, scene)
+        oToreus.position.y = SUPERPOS
 
         // Akali Sphera
         // Akosh Sphera
