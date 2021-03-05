@@ -4,6 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
     const A_ALIAS = 1       /* Anti-aliasing Preference */
     const COMPLEXITY = 72   /* Tesselations of the Torai and Segments of the Sphera */
+    const SUPERPOS = 1      /* Y Axis Superposition value */
     const DIA_A = 5         /* Alpha Diameter */
     const DOPPLER = 0.09    /* Anaglyph Red/Blue shift intensity */
     const PROTOGLYPH = {    /* Constellation Approximation & Codex Addressing */
@@ -59,7 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
         
         // Akali Atet Toreus - Black / Death
         const nToreus = BABYLON.MeshBuilder.CreateTorus('nToreus', TOREUS_GEO, scene)
-        nToreus.position.y = 1
+        nToreus.position.y = SUPERPOS
         nToreus.position.x = 0
         const toreusBlack = new BABYLON.StandardMaterial(scene)
         toreusBlack.alpha = 1.00
@@ -67,22 +68,28 @@ window.addEventListener('DOMContentLoaded', () => {
         nToreus.material = toreusBlack // n is for nULL
 
         // Akosh Atet Toreus - White / Life
-        const wToreus = BABYLON.MeshBuilder.CreateTorus('wToreus', TOREUS_GEO, scene)
-        wToreus.position.y = 1
-        wToreus.position.x = 0
+        const gToreus = BABYLON.MeshBuilder.CreateTorus('gToreus', TOREUS_GEO, scene)
+        gToreus.position.y = SUPERPOS
+        gToreus.position.x = 0
         const toreusWhite = new BABYLON.StandardMaterial(scene)
         toreusWhite.alpha = 0.75
         toreusWhite.emissiveColor = new BABYLON.Color3.White()
-        wToreus.material = toreusWhite
+        gToreus.material = toreusWhite // g is for gAIA
+
         // Aura Atet Toreus - Yellow / Air / Subliminal
-        const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS_GEO, scene)
-        aToreus.position.y = 1
-        aToreus.position.x = 0
+        const mToreus = BABYLON.MeshBuilder.CreateTorus('mToreus', TOREUS_GEO, scene)
+        mToreus.position.y = SUPERPOS
+        mToreus.position.x = 0
         const toreusYellow = new BABYLON.StandardMaterial(scene)
         toreusYellow.alpha = 0.010
         toreusYellow.emissiveColor = new BABYLON.Color3.Yellow()
-        aToreus.material = toreusYellow
+        mToreus.material = toreusYellow // m is for mAIA
+
         // Cryo Atet Toreus - Blue / Water / Darkness
+        const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS_GEO, scene)
+        aToreus.position.y = SUPERPOS
+        
+        aToreus.material = toreusBlue // a is for aBYSS
         // Zero Atet Toreus - Teal / Vaccuum / Plenum
         const cToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS_GEO, scene)
         cToreus.position.y = 1
