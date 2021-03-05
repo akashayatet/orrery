@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
         nToreus.position.y = SUPERPOS
         nToreus.position.x = 0
         const toreusBlack = new BABYLON.StandardMaterial(scene)
-        toreusBlack.alpha = 1.00
+        toreusBlack.alpha = 0.00
         toreusBlack.emissiveColor = new BABYLON.Color3.Black() // May need to be diffuseColor instead
         nToreus.material = toreusBlack // n is for nULL
 
@@ -88,8 +88,12 @@ window.addEventListener('DOMContentLoaded', () => {
         // Cryo Atet Toreus - Blue / Water / Darkness
         const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS_GEO, scene)
         aToreus.position.y = SUPERPOS
-        
+        aToreus.position.x = 0
+        const toreusBlue = new BABYLON.StandardMaterial(scene)
+        toreusBlue.alpha = 0.50
+        toreusBlue.emissiveColor = new BABYLON.Color3.Blue()
         aToreus.material = toreusBlue // a is for aBYSS
+        
         // Zero Atet Toreus - Teal / Vaccuum / Plenum
         const cToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS_GEO, scene)
         cToreus.position.y = 1
