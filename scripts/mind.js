@@ -3,11 +3,41 @@ window.addEventListener('DOMContentLoaded', () => {
     // Constants
     const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
     const A_ALIAS = 1       /* Anti-aliasing Preference */
-    const COMPLEXITY = 72   /* Tesselations of the Torai and Segments of the Sphera */
+    const COMPLEXITY = 144   /* Tesselations of the Torai and Segments of the Sphera */
     const SUPERPOS = 1      /* Y Axis Superposition value */
     const DIA_A = 5         /* Alpha Diameter */
-    const DOPPLER = 0.09    /* Anaglyph Red/Blue shift intensity */
+    const DOPPLER = 0.12    /* Anaglyph Red/Blue shift intensity */
     const SINGULARITY = 0   /* The heart of all things */
+    const MERKABA = {       /* Alpha Values for each MerKahBah Spectrum Band */
+        BLCK: {
+            ALPHA: 1.00,
+            COLOR: new BABYLON.Color3.Black()
+        },
+        WHTE: {
+            ALPHA: 1.75,
+            COLOR: new BABYLON.Color3.White()
+        },
+        YLLW: {
+            ALPHA: 1.010,
+            COLOR: new BABYLON.Color3.Yellow()
+        },
+        BLUE: {
+            ALPHA: 1.12,
+            COLOR: new BABYLON.Color3.Blue()
+        },
+        TEAL: {
+            ALPHA: 1.09,
+            COLOR: new BABYLON.Color3.Teal()
+        },
+        MGNT: {
+            ALPHA: 1.12,
+            COLOR: new BABYLON.Color3.Magenta()
+        },
+        PURP: {
+            ALPHA: 1.12,
+            COLOR: new BABYLON.Color3.Purple()
+        }
+    }
     const PROTOGLYPH = {    /* Constellation Approximation & Codex Addressing */
         /* Duo-Symmetrics (Position and Orientation Dominant) */
         BA: '\.', EL: '\:', IA: '\|',
@@ -38,7 +68,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const mField = document.getElementById('mindfield')
     mField.width = window.innerWidth
     mField.height = window.innerHeight
-    console.debug(mField)
 
     // Create GPU Engine
     const engine = new BABYLON.Engine(mField, A_ALIAS)
@@ -64,8 +93,8 @@ window.addEventListener('DOMContentLoaded', () => {
         nToreus.position.y = SUPERPOS
         nToreus.position.x = SINGULARITY
         const toreusBlack = new BABYLON.StandardMaterial(scene)
-        toreusBlack.alpha = 0.00
-        toreusBlack.emissiveColor = new BABYLON.Color3.Black() // May need to be diffuseColor instead
+        toreusBlack.alpha = MERKABA.BLCK.ALPHA
+        toreusBlack.emissiveColor = MERKABA.BLCK.COLOR // May need to be diffuseColor instead
         nToreus.material = toreusBlack // n is for nULL
 
         // Akosh Atet Toreus - White / Life
@@ -73,8 +102,8 @@ window.addEventListener('DOMContentLoaded', () => {
         gToreus.position.y = SUPERPOS
         gToreus.position.x = SINGULARITY
         const toreusWhite = new BABYLON.StandardMaterial(scene)
-        toreusWhite.alpha = 0.75
-        toreusWhite.emissiveColor = new BABYLON.Color3.White()
+        toreusWhite.alpha = MERKABA.WHTE.ALPHA
+        toreusWhite.emissiveColor = MERKABA.WHTE.COLOR
         gToreus.material = toreusWhite // g is for gAIA
 
         // Aura Atet Toreus - Yellow / Air / Subliminal
@@ -82,8 +111,8 @@ window.addEventListener('DOMContentLoaded', () => {
         mToreus.position.y = SUPERPOS
         mToreus.position.x = SINGULARITY
         const toreusYellow = new BABYLON.StandardMaterial(scene)
-        toreusYellow.alpha = 0.010
-        toreusYellow.emissiveColor = new BABYLON.Color3.Yellow()
+        toreusYellow.alpha = MERKABA.YLLW.ALPHA
+        toreusYellow.emissiveColor = MERKABA.YLLW.COLOR
         mToreus.material = toreusYellow // m is for mAIA
 
         // Cryo Atet Toreus - Blue / Water / Darkness
@@ -91,8 +120,8 @@ window.addEventListener('DOMContentLoaded', () => {
         aToreus.position.y = SUPERPOS
         aToreus.position.x = SINGULARITY-(DOPPLER+DOPPLER)
         const toreusBlue = new BABYLON.StandardMaterial(scene)
-        toreusBlue.alpha = 0.12
-        toreusBlue.emissiveColor = new BABYLON.Color3.Blue()
+        toreusBlue.alpha = MERKABA.BLUE.ALPHA
+        toreusBlue.emissiveColor = MERKABA.BLUE.COLOR
         aToreus.material = toreusBlue // a is for aBYSS
 
         // Zero Atet Toreus - Teal / Vaccuum / Plenum
@@ -100,8 +129,8 @@ window.addEventListener('DOMContentLoaded', () => {
         zToreus.position.y = SUPERPOS
         zToreus.position.x = SINGULARITY-DOPPLER
         const toreusTeal = new BABYLON.StandardMaterial(scene)
-        toreusTeal.alpha = 0.09
-        toreusTeal.emissiveColor = new BABYLON.Color3.Teal()
+        toreusTeal.alpha = MERKABA.TEAL.ALPHA
+        toreusTeal.emissiveColor = MERKABA.TEAL.COLOR
         zToreus.material = toreusTeal // z is for zERO-POINT
 
         // Pyro Atet Toreus - Magenta / Fire / Light
@@ -109,8 +138,8 @@ window.addEventListener('DOMContentLoaded', () => {
         pToreus.position.y = SUPERPOS
         pToreus.position.x = SINGULARITY+DOPPLER
         const toreusMagenta = new BABYLON.StandardMaterial(scene)
-        toreusMagenta.alpha = 0.12
-        toreusMagenta.emissiveColor = new BABYLON.Color3.Magenta()
+        toreusMagenta.alpha = MERKABA.MGNT.ALPHA
+        toreusMagenta.emissiveColor = MERKABA.MGNT.COLOR
         pToreus.material = toreusMagenta // p is for pLASMA
 
         // Zon Atet Toreus - Purple / Chaos / Transmutation
@@ -118,8 +147,8 @@ window.addEventListener('DOMContentLoaded', () => {
         oToreus.position.y = SUPERPOS
         oToreus.position.x = SINGULARITY+(DOPPLER+DOPPLER)
         const toreusPurple = new BABYLON.StandardMaterial(scene)
-        toreusPurple.alpha = 0.12
-        toreusPurple.emissiveColor = new BABYLON.Color3.Purple()
+        toreusPurple.alpha = MERKABA.PURP.ALPHA
+        toreusPurple.emissiveColor = MERKABA.PURP.COLOR
         oToreus.material = toreusPurple // o is for oMEGA
 
         // Akali Sphera
