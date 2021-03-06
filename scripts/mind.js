@@ -2,6 +2,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Constants
     const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
+    const XPOS_1 = -6
+    const XPOS_2 = 6
     const A_ALIAS = 1       /* Anti-aliasing Preference */
     const COMPLEXITY = 27   /* Tesselations of the Torai and Segments of the Sphera */
     const SUPERPOS = 1      /* Y Axis Superposition value */
@@ -115,18 +117,19 @@ window.addEventListener('DOMContentLoaded', () => {
          */
         
         // Akali Atet Toreus - Black / Death
-        const nToreus = BABYLON.MeshBuilder.CreateTorus('nToreus', TOREUS(waveForms[0].current), scene)
-        nToreus.position.y = SUPERPOS+0
-        nToreus.position.x = SINGULARITY
-        nToreus.rotation = new BABYLON.Vector3(
+        const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus', TOREUS(waveForms[0].current), scene)
+        const nToreus2 
+        nToreus1.position.y = SUPERPOS+0
+        nToreus1.position.x = SINGULARITY+XPOS_1
+        nToreus1.rotation = new BABYLON.Vector3(
             alphaRot*subFactor3, 
             betaRot*subFactor6, 
             gammaRot*subFactor9
         )
-        const toreusBlack = new BABYLON.StandardMaterial(scene)
-        toreusBlack.alpha = MERKABA.BLCK.ALPHA
-        toreusBlack.emissiveColor = MERKABA.BLCK.COLOR // May need to be diffuseColor instead
-        nToreus.material = toreusBlack // n is for nULL
+        const toreusBlack1 = new BABYLON.StandardMaterial(scene)
+        toreusBlack1.alpha = MERKABA.BLCK.ALPHA
+        toreusBlack1.emissiveColor = MERKABA.BLCK.COLOR // May need to be diffuseColor instead
+        nToreus1.material = toreusBlack1 // n is for nULL
 
         // Akosh Atet Toreus - White / Life
         const gToreus = BABYLON.MeshBuilder.CreateTorus('gToreus', TOREUS(waveForms[1].current), scene)
@@ -222,6 +225,14 @@ window.addEventListener('DOMContentLoaded', () => {
         spheraWhite.emissiveColor = MERKABA.WHTE.COLOR
         gSphera.material = spheraWhite // g is for gAIA
 
+        const gSphera2 = BABYLON.MeshBuilder.CreateSphere('gSphera', SPHERA_GEO, scene)
+        gSphera2.position.y = SUPERPOS
+        gSphera2.position.x = SINGULARITY + 12// Sphera don't have a rotation
+        const spheraWhite2 = new BABYLON.StandardMaterial(scene)
+        spheraWhite2.alpha = MERKABA.WHTE.ALPHA
+        spheraWhite2.emissiveColor = MERKABA.WHTE.COLOR
+        gSphera2.material = spheraWhite2 // g is for gAIA
+
         // Zon Sphera
         // Akali Rayarc
         // Akosh Rayarc
@@ -238,12 +249,11 @@ window.addEventListener('DOMContentLoaded', () => {
         const ROTVAL = Math.PI
         const ENTROPY = 1.618
         // alphaRot -= (ROTVAL / ENTROPY)
-        betaRot -= (ROTVAL / ENTROPY)
+        // betaRot -= (ROTVAL / ENTROPY)
         gammaRot -= (ROTVAL / ENTROPY)
 
         // Expansion|Contraction
         waveForms.forEach(wave => {
-            console.debug(wave)
             if (!(wave.current >= wave.limit) && !wave.peaked) {
                 wave.current += rateOfChange
             } else if (wave.peaked && wave.current > 00) {
@@ -259,6 +269,6 @@ window.addEventListener('DOMContentLoaded', () => {
       })
 
       // •)) Synesthesia ~~
-    //   console.debug(Tone)
-
+      const synth = new Tone.Synth().toDestination()
+      synth.triggerAttackRelease("C4", "8n")
 })
