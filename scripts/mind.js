@@ -92,19 +92,6 @@ window.addEventListener('DOMContentLoaded', () => {
         eye.setTarget(BABYLON.Vector3.Zero())
 
         // Generate Protoglyphics
-        // Writer = BABYLON.MeshWriter(scene, {scale: 0.25, defaultFont: "Arial"});
-        // let gyrainbow  = new Writer( 
-        //         "}•{ {(GYRAINBOW)} ]|[",
-        //         {
-        //             "anchor": "center",
-        //             "letter-height": 50,
-        //             "color": "#1C3870",
-        //             "position": {
-        //                 "z": 20
-        //             }
-        //         }
-        //     );
-
 
         // Generate the Rayarc, Toreus & Spheras for the Ayat
         /* THE AYAT * The sun and moon aspects of the three elements; the organs of the atet.
@@ -236,13 +223,16 @@ window.addEventListener('DOMContentLoaded', () => {
         // Iterate Rotations
         const ROTVAL = Math.PI
         const ENTROPY = 1.618
-        alphaRot -= (ROTVAL / ENTROPY)
-        betaRot -= (ROTVAL / ENTROPY)
-        gammaRot -= (ROTVAL / ENTROPY)
+        // alphaRot -= (ROTVAL / ENTROPY)
+        // betaRot -= (ROTVAL / ENTROPY)
+        // gammaRot -= (ROTVAL / ENTROPY)
     
         // Iterate Scene
         let lField = createScene()
-        // console.debug(lField)
         lField.render()
       })
+
+      // •)) Synesthesia ~~
+    //   console.debug(Tone)
+
 })
