@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Constants
     const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
     const A_ALIAS = 1       /* Anti-aliasing Preference */
-    const COMPLEXITY = 72   /* Tesselations of the Torai and Segments of the Sphera */
+    const COMPLEXITY = 12   /* Tesselations of the Torai and Segments of the Sphera */
     const SUPERPOS = 1      /* Y Axis Superposition value */
     const DIA_A = 2         /* Alpha Diameter */
     const DOPPLER = 0.0    /* Anaglyph Red/Blue shift intensity */
@@ -51,10 +51,13 @@ window.addEventListener('DOMContentLoaded', () => {
         OM: {S: '\)', M: '\('}, 
         VU: {S: '\]', M: '\['},
     }
-    const TOREUS_GEO = {
-        diameter: DIA_A,
-        thickness: RAD(DIA_A)*2,          /* Should equally match Rayarc bandwidths */
-        tessellation: COMPLEXITY        /* Tesselations will also affect color depth */
+    const TOREUS = (diame, thicc, tessells) => {
+        const TOREUS_GEO = {
+            diameter: DIA_A + (diame ? diame : 0),
+            thickness: (RAD(DIA_A)*2) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
+            tessellation: COMPLEXITY + (tessells ? tessells : 0)/* Tesselations will also affect color depth */
+        }
+        return TOREUS_GEO
     }
     const SPHERA_GEO = {
         diameter: DIA_A*0.618,   /* Should be sized to match a subset ratio of a Toreus boundary */
@@ -73,6 +76,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const engine = new BABYLON.Engine(mField, A_ALIAS)
 
     // Oscillation Tuning
+    // Rotation
     const baseRot = 1
     let alphaRot = baseRot
     let betaRot = baseRot
@@ -80,6 +84,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const subFactor3 = 0.03
     const subFactor6 = 0.06
     const subFactor9 = 0.09
+    // Waveform
+    let biowave = 0
 
     // Generate scene
     const createScene = () => {
@@ -87,7 +93,7 @@ window.addEventListener('DOMContentLoaded', () => {
         scene.clearColor = new BABYLON.Color3.Black()
 
         // TargetCamera and sphere shapes produce the pseudo-2D top-down view of circles
-        const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 10, 0), scene)
+        const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 27, 0), scene)
         // This targets the eye to scene origin
         eye.setTarget(BABYLON.Vector3.Zero())
 
@@ -100,7 +106,7 @@ window.addEventListener('DOMContentLoaded', () => {
          */
         
         // Akali Atet Toreus - Black / Death
-        const nToreus = BABYLON.MeshBuilder.CreateTorus('nToreus', TOREUS_GEO, scene)
+        const nToreus = BABYLON.MeshBuilder.CreateTorus('nToreus', TOREUS(), scene)
         nToreus.position.y = SUPERPOS
         nToreus.position.x = SINGULARITY
         nToreus.rotation = new BABYLON.Vector3(
@@ -114,7 +120,7 @@ window.addEventListener('DOMContentLoaded', () => {
         nToreus.material = toreusBlack // n is for nULL
 
         // Akosh Atet Toreus - White / Life
-        const gToreus = BABYLON.MeshBuilder.CreateTorus('gToreus', TOREUS_GEO, scene)
+        const gToreus = BABYLON.MeshBuilder.CreateTorus('gToreus', TOREUS(biowave), scene)
         gToreus.position.y = SUPERPOS
         gToreus.position.x = SINGULARITY
         gToreus.rotation = new BABYLON.Vector3(
@@ -128,7 +134,7 @@ window.addEventListener('DOMContentLoaded', () => {
         gToreus.material = toreusWhite // g is for gAIA
 
         // Aura Atet Toreus - Yellow / Air / Subliminal
-        const mToreus = BABYLON.MeshBuilder.CreateTorus('mToreus', TOREUS_GEO, scene)
+        const mToreus = BABYLON.MeshBuilder.CreateTorus('mToreus', TOREUS(), scene)
         mToreus.position.y = SUPERPOS
         mToreus.position.x = SINGULARITY
         mToreus.rotation = new BABYLON.Vector3(
@@ -142,7 +148,7 @@ window.addEventListener('DOMContentLoaded', () => {
         mToreus.material = toreusYellow // m is for mAIA
 
         // Cryo Atet Toreus - Blue / Water / Darkness
-        const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS_GEO, scene)
+        const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS(), scene)
         aToreus.position.y = SUPERPOS
         aToreus.position.x = SINGULARITY-(DOPPLER+DOPPLER)
         aToreus.rotation = new BABYLON.Vector3(
@@ -156,7 +162,7 @@ window.addEventListener('DOMContentLoaded', () => {
         aToreus.material = toreusBlue // a is for aBYSS
 
         // Zero Atet Toreus - Teal / Vaccuum / Plenum
-        const zToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS_GEO, scene)
+        const zToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS(), scene)
         zToreus.position.y = SUPERPOS
         zToreus.position.x = SINGULARITY-DOPPLER
         zToreus.rotation = new BABYLON.Vector3(
@@ -170,7 +176,7 @@ window.addEventListener('DOMContentLoaded', () => {
         zToreus.material = toreusTeal // z is for zERO-POINT
 
         // Pyro Atet Toreus - Magenta / Fire / Light
-        const pToreus = BABYLON.MeshBuilder.CreateTorus('pToreus', TOREUS_GEO, scene)
+        const pToreus = BABYLON.MeshBuilder.CreateTorus('pToreus', TOREUS(), scene)
         pToreus.position.y = SUPERPOS
         pToreus.position.x = SINGULARITY+DOPPLER
         pToreus.rotation = new BABYLON.Vector3(alphaRot*subFactor9, betaRot*subFactor3, gammaRot*subFactor6)
@@ -180,7 +186,7 @@ window.addEventListener('DOMContentLoaded', () => {
         pToreus.material = toreusMagenta // p is for pLASMA
 
         // Zon Atet Toreus - Purple / Chaos / Transmutation
-        const oToreus = BABYLON.MeshBuilder.CreateTorus('oToreus', TOREUS_GEO, scene)
+        const oToreus = BABYLON.MeshBuilder.CreateTorus('oToreus', TOREUS(), scene)
         oToreus.position.y = SUPERPOS
         oToreus.position.x = SINGULARITY+(DOPPLER+DOPPLER)
         oToreus.rotation = new BABYLON.Vector3(alphaRot*subFactor6, betaRot*subFactor3, gammaRot*subFactor9)
@@ -217,19 +223,32 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     
     // Experiments...
-    console.debug('}•{')
+    let limitReached = false
 
     engine.runRenderLoop(() => {
-        // Iterate Rotations
+        // --- Transmutations --- \\
         const ROTVAL = Math.PI
         const ENTROPY = 1.618
         // alphaRot -= (ROTVAL / ENTROPY)
         // betaRot -= (ROTVAL / ENTROPY)
         // gammaRot -= (ROTVAL / ENTROPY)
-    
+
+        // Expansion|Contraction
+        let rate = 0.25
+        const source = 00
+        const limit = 6
+
+        if (biowave != limit && !limitReached) {
+            biowave += rate
+        } else if (limitReached && biowave > 00) {
+            biowave -= rate
+        } else {
+            limitReached = biowave != 00
+        }
+
+        
         // Iterate Scene
-        let lField = createScene()
-        lField.render()
+        createScene().render()
       })
 
       // •)) Synesthesia ~~
