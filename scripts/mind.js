@@ -86,6 +86,12 @@ window.addEventListener('DOMContentLoaded', () => {
     const subFactor3 = 0.03
     const subFactor6 = 0.06
     const subFactor9 = 0.09
+    // ENTITY.rotation = new BABYLON.Vector3(
+    //     alphaRot*subFactor3, 
+    //     betaRot*subFactor6, 
+    //     gammaRot*subFactor9
+    // )
+
     // Waveforms
     const rateOfChange = 0.042
     const waveForms = [
@@ -115,111 +121,92 @@ window.addEventListener('DOMContentLoaded', () => {
          * {BLCK} :~: WHTE :~: Blue • Teal • White • Yellow • Magenta • Purple
          * A.K.A. MerKahBah Spectrum
          */
+        const black = new BABYLON.StandardMaterial(scene) // Material only needs to be defined once
+        black.alpha = MERKABA.BLCK.ALPHA
+        black.emissiveColor = MERKABA.BLCK.COLOR // May need to be diffuseColor instead
+        const white = new BABYLON.StandardMaterial(scene)
+        white.alpha = MERKABA.WHTE.ALPHA
+        white.emissiveColor = MERKABA.WHTE.COLOR
+        const yellow = new BABYLON.StandardMaterial(scene)
+        yellow.alpha = MERKABA.YLLW.ALPHA
+        yellow.emissiveColor = MERKABA.YLLW.COLOR
+        const blue = new BABYLON.StandardMaterial(scene)
+        blue.alpha = MERKABA.BLUE.ALPHA
+        blue.emissiveColor = MERKABA.BLUE.COLOR
+        const teal = new BABYLON.StandardMaterial(scene)
+        teal.alpha = MERKABA.TEAL.ALPHA
+        teal.emissiveColor = MERKABA.TEAL.COLOR
+        const magenta = new BABYLON.StandardMaterial(scene)
+        magenta.alpha = MERKABA.MGNT.ALPHA
+        magenta.emissiveColor = MERKABA.MGNT.COLOR
+        const purple = new BABYLON.StandardMaterial(scene)
+        purple.alpha = MERKABA.PURP.ALPHA
+        purple.emissiveColor = MERKABA.PURP.COLOR
         
+
+
         // Akali Atet Toreus - Black / Death
-        const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus', TOREUS(waveForms[0].current), scene)
-        const nToreus2 
+        const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus1', TOREUS(waveForms[0].current), scene)
+        const nToreus2 = BABYLON.MeshBuilder.CreateTorus('nToreus2', TOREUS(waveForms[6].current), scene)
         nToreus1.position.y = SUPERPOS+0
+        nToreus2.position.y = SUPERPOS+0
         nToreus1.position.x = SINGULARITY+XPOS_1
-        nToreus1.rotation = new BABYLON.Vector3(
-            alphaRot*subFactor3, 
-            betaRot*subFactor6, 
-            gammaRot*subFactor9
-        )
-        const toreusBlack1 = new BABYLON.StandardMaterial(scene)
-        toreusBlack1.alpha = MERKABA.BLCK.ALPHA
-        toreusBlack1.emissiveColor = MERKABA.BLCK.COLOR // May need to be diffuseColor instead
-        nToreus1.material = toreusBlack1 // n is for nULL
+        nToreus2.position.x = SINGULARITY+XPOS_2
+        nToreus2.material = toreusBlack
+        nToreus1.material = toreusBlack // n is for nULL
 
         // Akosh Atet Toreus - White / Life
-        const gToreus = BABYLON.MeshBuilder.CreateTorus('gToreus', TOREUS(waveForms[1].current), scene)
-        gToreus.position.y = SUPERPOS+1
-        gToreus.position.x = SINGULARITY
-        gToreus.rotation = new BABYLON.Vector3(
-            alphaRot*subFactor9, 
-            betaRot*subFactor6, 
-            gammaRot*subFactor3
-        )
-        const toreusWhite = new BABYLON.StandardMaterial(scene)
-        toreusWhite.alpha = MERKABA.WHTE.ALPHA
-        toreusWhite.emissiveColor = MERKABA.WHTE.COLOR
-        gToreus.material = toreusWhite // g is for gAIA
+        const gToreus1 = BABYLON.MeshBuilder.CreateTorus('gToreus1', TOREUS(waveForms[1].current), scene)
+        const gToreus2 = BABYLON.MeshBuilder.CreateTorus('gToreus2', TOREUS(waveForms[5].current), scene)
+        gToreus1.position.y = SUPERPOS+1
+        gToreus2.position.y = SUPERPOS+1
+        gToreus1.position.x = SINGULARITY+XPOS_1
+        gToreus2.position.x = SINGULARITY+XPOS_2
+        gToreus2.material = toreusWhite
+        gToreus1.material = toreusWhite // g is for gAIA
 
         // Aura Atet Toreus - Yellow / Air / Subliminal
-        const mToreus = BABYLON.MeshBuilder.CreateTorus('mToreus', TOREUS(waveForms[2].current), scene)
-        mToreus.position.y = SUPERPOS-1
+        const mToreus1 = BABYLON.MeshBuilder.CreateTorus('mToreus1', TOREUS(waveForms[2].current), scene)
+        const mToreus2 = BABYLON.MeshBuilder.CreateTorus('mToreus2', TOREUS(waveForms[4].current), scene)
+        mToreus1.position.y = SUPERPOS-1
         mToreus.position.x = SINGULARITY
-        mToreus.rotation = new BABYLON.Vector3(
-            alphaRot*subFactor3, 
-            betaRot*subFactor3, 
-            gammaRot*subFactor3
-        )
-        const toreusYellow = new BABYLON.StandardMaterial(scene)
-        toreusYellow.alpha = MERKABA.YLLW.ALPHA
-        toreusYellow.emissiveColor = MERKABA.YLLW.COLOR
         mToreus.material = toreusYellow // m is for mAIA
 
         // Cryo Atet Toreus - Blue / Water / Darkness
         const aToreus = BABYLON.MeshBuilder.CreateTorus('aToreus', TOREUS(waveForms[3].current), scene)
         aToreus.position.y = SUPERPOS-2
         aToreus.position.x = SINGULARITY-(DOPPLER+DOPPLER)
-        aToreus.rotation = new BABYLON.Vector3(
-            alphaRot*subFactor6, 
-            betaRot*subFactor6, 
-            gammaRot*subFactor6
-        )
-        const toreusBlue = new BABYLON.StandardMaterial(scene)
-        toreusBlue.alpha = MERKABA.BLUE.ALPHA
-        toreusBlue.emissiveColor = MERKABA.BLUE.COLOR
         aToreus.material = toreusBlue // a is for aBYSS
 
         // Zero Atet Toreus - Teal / Vaccuum / Plenum
         const zToreus = BABYLON.MeshBuilder.CreateTorus('cToreus', TOREUS(waveForms[4].current), scene)
         zToreus.position.y = SUPERPOS-3
         zToreus.position.x = SINGULARITY-DOPPLER
-        zToreus.rotation = new BABYLON.Vector3(
-            alphaRot*subFactor9, 
-            betaRot*subFactor9, 
-            gammaRot*subFactor9
-        )
-        const toreusTeal = new BABYLON.StandardMaterial(scene)
-        toreusTeal.alpha = MERKABA.TEAL.ALPHA
-        toreusTeal.emissiveColor = MERKABA.TEAL.COLOR
         zToreus.material = toreusTeal // z is for zERO-POINT
 
         // Pyro Atet Toreus - Magenta / Fire / Light
         const pToreus = BABYLON.MeshBuilder.CreateTorus('pToreus', TOREUS(waveForms[5].current), scene)
         pToreus.position.y = SUPERPOS-4
         pToreus.position.x = SINGULARITY+DOPPLER
-        pToreus.rotation = new BABYLON.Vector3(alphaRot*subFactor9, betaRot*subFactor3, gammaRot*subFactor6)
-        const toreusMagenta = new BABYLON.StandardMaterial(scene)
-        toreusMagenta.alpha = MERKABA.MGNT.ALPHA
-        toreusMagenta.emissiveColor = MERKABA.MGNT.COLOR
         pToreus.material = toreusMagenta // p is for pLASMA
 
         // Zon Atet Toreus - Purple / Chaos / Transmutation
         const oToreus = BABYLON.MeshBuilder.CreateTorus('oToreus', TOREUS(waveForms[6].current), scene)
         oToreus.position.y = SUPERPOS-5
         oToreus.position.x = SINGULARITY+(DOPPLER+DOPPLER)
-        oToreus.rotation = new BABYLON.Vector3(alphaRot*subFactor6, betaRot*subFactor3, gammaRot*subFactor9)
-        const toreusPurple = new BABYLON.StandardMaterial(scene)
-        toreusPurple.alpha = MERKABA.PURP.ALPHA
-        toreusPurple.emissiveColor = MERKABA.PURP.COLOR
         oToreus.material = toreusPurple // o is for oMEGA
 
         // Akali Sphera
         const nSphera = BABYLON.MeshBuilder.CreateSphere('nSphera', SPHERA_GEO, scene)
         nSphera.position.y = SUPERPOS
-        nSphera.position.x = SINGULARITY // Sphera don't have a rotation
-        const spheraBlack = new BABYLON.StandardMaterial(scene)
-        spheraBlack.alpha = MERKABA.BLCK.ALPHA
-        spheraBlack.emissiveColor = MERKABA.BLCK.COLOR // May need to be diffuseColor instead
+        nSphera.position.x = SINGULARITY
         nSphera.material = spheraBlack // n is for nULL
 
         // Akosh Atet Sphera - White / Life
         const gSphera = BABYLON.MeshBuilder.CreateSphere('gSphera', SPHERA_GEO, scene)
         gSphera.position.y = SUPERPOS
-        gSphera.position.x = SINGULARITY // Sphera don't have a rotation
+        gSphera.position.x = XPOS_1
+        // Sphera don't have a rotation
         const spheraWhite = new BABYLON.StandardMaterial(scene)
         spheraWhite.alpha = MERKABA.WHTE.ALPHA
         spheraWhite.emissiveColor = MERKABA.WHTE.COLOR
@@ -227,7 +214,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const gSphera2 = BABYLON.MeshBuilder.CreateSphere('gSphera', SPHERA_GEO, scene)
         gSphera2.position.y = SUPERPOS
-        gSphera2.position.x = SINGULARITY + 12// Sphera don't have a rotation
+        gSphera2.position.x = XPOS_2
+        // Sphera don't have a rotation
         const spheraWhite2 = new BABYLON.StandardMaterial(scene)
         spheraWhite2.alpha = MERKABA.WHTE.ALPHA
         spheraWhite2.emissiveColor = MERKABA.WHTE.COLOR
@@ -246,11 +234,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     engine.runRenderLoop(() => {
         // --- Transmutations --- \\
+        // Spin|Energy
         const ROTVAL = Math.PI
         const ENTROPY = 1.618
         // alphaRot -= (ROTVAL / ENTROPY)
         // betaRot -= (ROTVAL / ENTROPY)
-        gammaRot -= (ROTVAL / ENTROPY)
+        // gammaRot -= (ROTVAL / ENTROPY)
 
         // Expansion|Contraction
         waveForms.forEach(wave => {
@@ -262,7 +251,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 wave.peaked = !(wave.current <= 00)
             }
         })
-
         
         // Iterate Scene
         createScene().render()
