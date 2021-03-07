@@ -1,59 +1,11 @@
+import Modifiers from "./util/Modifiers"
+
 window.addEventListener('DOMContentLoaded', () => {
 
-    // Constants
-    const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
-    const XMASTER = 2
-    const XPOS_1 = -XMASTER
-    const XPOS_2 = +XMASTER
-    const A_ALIAS = 1       /* Anti-aliasing Preference */
-    const COMPLEXITY = 27   /* Tesselations of the Torai and Segments of the Sphera */
-    const SUPERPOS = 1      /* Y Axis Superposition value */
-    const DIA_A = 2         /* Alpha Diameter */
-    const DOPPLER = 0.00     /* Anaglyph Red/Blue shift intensity */
-    let SINGULARITY = 0     /* The heart of all things */
-    const MERKABA = {       /* Alpha Values for each MerKahBah Spectrum Band */
-        BLCK: {
-            ALPHA: 1.00,
-            COLOR: new BABYLON.Color3.Purple()
-        },
-        WHTE: {
-            ALPHA: 1.00,
-            COLOR: new BABYLON.Color3.White()
-        },
-        YLLW: {
-            ALPHA: 1.00,
-            COLOR: new BABYLON.Color3.Yellow()
-        },
-        BLUE: {
-            ALPHA: 1.00,
-            COLOR: new BABYLON.Color3.Blue()
-        },
-        TEAL: {
-            ALPHA: 1.00,
-            COLOR: new BABYLON.Color3.Teal()
-        },
-        MGNT: {
-            ALPHA: 1.00,
-            COLOR: new BABYLON.Color3.Red()
-        },
-        PURP: {
-            ALPHA: 1.00,
-            COLOR: new BABYLON.Color3.Magenta()
-        }
-    }
-    const PROTOGLYPH = {    /* Constellation Approximation & Codex Addressing */
-        /* Duo-Symmetrics (Position and Orientation Dominant) */
-        BA: '\.', EL: '\:', IA: '\|',
-        QU: '\°', UR: '\•', ET: '\=',
+    // Local Experimental Modifiers
+    const XPOS_1 = -Modifiers.X_ROOT
+    const XPOS_2 = +Modifiers.X_ROOT
 
-        /* Non-Symmetrics (Orientation Dominant) */
-        VeK: '\/', TaR: '\\', GaTH: '\~',
-
-        /* Uni-Symmetrics (S = sun | M = moon ::: Position Dominant) */
-        NY: {S: '\}', M: '\{'}, 
-        OM: {S: '\)', M: '\('}, 
-        VU: {S: '\]', M: '\['},
-    }
     const TOREUS = (diame, thicc, tessells) => {
         const TOREUS_GEO = {
             diameter: DIA_A + (diame ? diame : 0),
@@ -78,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Create GPU Engine
     const engine = new BABYLON.Engine(mField, A_ALIAS)
 
-    // Oscillation Tuning
+    // --- Oscillation Tuning --- \\
     // Rotation
     const baseRot = 1
     let alphaRot = baseRot
@@ -115,37 +67,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 27, 0), scene)
         // This targets the eye to scene origin
         eye.setTarget(new BABYLON.Vector3(15, -720, 0))
-        // eye.rotation = new 
-
-        // Generate Protoglyphics
 
         // Generate the Rayarc, Toreus & Spheras for the Ayat
-        /* THE AYAT * The sun and moon aspects of the three elements; the organs of the atet.
-         * {BLCK} :~: WHTE :~: Blue • Teal • White • Yellow • Magenta • Purple
-         * A.K.A. MerKahBah Spectrum
-         */
-        const black = new BABYLON.StandardMaterial(scene) // Material only needs to be defined once
-        black.alpha = MERKABA.BLCK.ALPHA
-        black.emissiveColor = MERKABA.BLCK.COLOR // May need to be diffuseColor instead
-        const white = new BABYLON.StandardMaterial(scene)
-        white.alpha = MERKABA.WHTE.ALPHA
-        white.emissiveColor = MERKABA.WHTE.COLOR
-        const yellow = new BABYLON.StandardMaterial(scene)
-        yellow.alpha = MERKABA.YLLW.ALPHA
-        yellow.emissiveColor = MERKABA.YLLW.COLOR
-        const blue = new BABYLON.StandardMaterial(scene)
-        blue.alpha = MERKABA.BLUE.ALPHA
-        blue.emissiveColor = MERKABA.BLUE.COLOR
-        const teal = new BABYLON.StandardMaterial(scene)
-        teal.alpha = MERKABA.TEAL.ALPHA
-        teal.emissiveColor = MERKABA.TEAL.COLOR
-        const magenta = new BABYLON.StandardMaterial(scene)
-        magenta.alpha = MERKABA.MGNT.ALPHA
-        magenta.emissiveColor = MERKABA.MGNT.COLOR
-        const purple = new BABYLON.StandardMaterial(scene)
-        purple.alpha = MERKABA.PURP.ALPHA
-        purple.emissiveColor = MERKABA.PURP.COLOR
-        
         let theThiccness = 0.22
 
         // Akali Atet Toreus - Black / Death
@@ -265,9 +188,9 @@ window.addEventListener('DOMContentLoaded', () => {
         
         // Iterate Scene
         createScene().render()
-      })
+    })
 
-      // •)) Synesthesia ~~
-      const synth = new Tone.Synth().toDestination()
-      synth.triggerAttackRelease("C4", "8n")
+    // •)) Synthesthesia ~~
+    //   const synth = new Tone.Synth().toDestination()
+    //   synth.triggerAttackRelease("C4", "8n")
 })
