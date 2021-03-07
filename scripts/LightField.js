@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const XPOS_1 = -XMASTER
     const XPOS_2 = +XMASTER
     const A_ALIAS = 1       /* Anti-aliasing Preference */
-    const COMPLEXITY = 12   /* Tesselations of the Torai and Segments of the Sphera */
+    const COMPLEXITY = 27   /* Tesselations of the Torai and Segments of the Sphera */
     const SUPERPOS = 1      /* Y Axis Superposition value */
     const DIA_A = 2         /* Alpha Diameter */
     const DOPPLER = 0.00     /* Anaglyph Red/Blue shift intensity */
@@ -104,14 +104,15 @@ window.addEventListener('DOMContentLoaded', () => {
         {current: 17, limit: 17, peaked: false},
         {current: 00, limit: 18, peaked: false}
     ]
-
+    
+    // Instantiate TransformNodes to manifest movement of forms
     // Generate scene
     const createScene = () => {
         let scene = new BABYLON.Scene(engine)
         scene.clearColor = new BABYLON.Color3.Black()
 
         // TargetCamera and sphere shapes produce the pseudo-2D top-down view of circles
-        const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 36, 0), scene)
+        const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 27, 0), scene)
         // This targets the eye to scene origin
         eye.setTarget(new BABYLON.Vector3(15, -720, 0))
         // eye.rotation = new 
