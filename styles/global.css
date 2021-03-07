@@ -86,7 +86,24 @@
   /* ==========================================================================
      Author's custom styles
      ========================================================================== */
-  
+  #placard-can {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    top: 56vh;
+  }
+  #placard-can > p {
+    align-content: center;
+    text-align:center;
+    font-family: 'Encode Sans Condensed';
+    color: white;
+    font-size: 42pt;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+    
+  }
   /* ==========================================================================
      Helper classes
      ========================================================================== */
