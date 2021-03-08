@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Modifiers & Constants
     let MODS;
-    const DOPPLER = 0.00     /* Anaglyph Red/Blue shift intensity */
+    // const DOPPLER = 0.00     /* Anaglyph Red/Blue shift intensity */
     let SINGULARITY = 0     /* The heart of all things */
     const MERKABA = {       /* Alpha Values for each MerKahBah Spectrum Band */
         BLCK: {
@@ -152,8 +152,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const gToreus2 = BABYLON.MeshBuilder.CreateTorus('gToreus2', TOREUS(waveForms[1].current, theThiccness), scene)
         gToreus1.position.y = MODS.Y_ROOT+0.01
         gToreus2.position.y = MODS.Y_ROOT+0.01
-        gToreus1.position.x = SINGULARITY+DOPPLER+XPOS_1
-        gToreus2.position.x = SINGULARITY-DOPPLER+XPOS_2
+        gToreus1.position.x = SINGULARITY+MODS.DOPPLER+XPOS_1
+        gToreus2.position.x = SINGULARITY-MODS.DOPPLER+XPOS_2
         gToreus2.material = white
         gToreus1.material = white // g is for gAIA
 
@@ -162,8 +162,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const mToreus2 = BABYLON.MeshBuilder.CreateTorus('mToreus2', TOREUS(waveForms[2].current, theThiccness), scene)
         mToreus1.position.y = MODS.Y_ROOT-0.01
         mToreus2.position.y = MODS.Y_ROOT-0.01
-        mToreus1.position.x = SINGULARITY+(DOPPLER+DOPPLER)+XPOS_1
-        mToreus2.position.x = SINGULARITY+(DOPPLER+DOPPLER)+XPOS_2
+        mToreus1.position.x = SINGULARITY+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1
+        mToreus2.position.x = SINGULARITY+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2
         mToreus2.material = yellow
         mToreus1.material = yellow // m is for mAIA
 
@@ -172,8 +172,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const aToreus2 = BABYLON.MeshBuilder.CreateTorus('aToreus2', TOREUS(waveForms[3].current, theThiccness), scene)
         aToreus1.position.y = MODS.Y_ROOT-0.02
         aToreus2.position.y = MODS.Y_ROOT-0.02
-        aToreus1.position.x = SINGULARITY-(DOPPLER+DOPPLER)+XPOS_1
-        aToreus2.position.x = SINGULARITY-(DOPPLER+DOPPLER)+XPOS_2
+        aToreus1.position.x = SINGULARITY-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1
+        aToreus2.position.x = SINGULARITY-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2
         aToreus2.material = blue
         aToreus1.material = blue // a is for aBYSS
 
@@ -182,8 +182,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const zToreus1 = BABYLON.MeshBuilder.CreateTorus('cToreus1', TOREUS(waveForms[4].current, theThiccness), scene)
         zToreus1.position.y = MODS.Y_ROOT-0.03
         zToreus2.position.y = MODS.Y_ROOT-0.03
-        zToreus1.position.x = SINGULARITY-DOPPLER+XPOS_1
-        zToreus2.position.x = SINGULARITY-DOPPLER+XPOS_2
+        zToreus1.position.x = SINGULARITY-MODS.DOPPLER+XPOS_1
+        zToreus2.position.x = SINGULARITY-MODS.DOPPLER+XPOS_2
         zToreus2.material = teal
         zToreus1.material = teal // z is for zERO-POINT
 
@@ -192,8 +192,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const pToreus2 = BABYLON.MeshBuilder.CreateTorus('pToreus2', TOREUS(waveForms[5].current, theThiccness), scene)
         pToreus1.position.y = MODS.Y_ROOT-0.04
         pToreus2.position.y = MODS.Y_ROOT-0.04
-        pToreus1.position.x = SINGULARITY+DOPPLER+XPOS_1
-        pToreus2.position.x = SINGULARITY+DOPPLER+XPOS_2
+        pToreus1.position.x = SINGULARITY+MODS.DOPPLER+XPOS_1
+        pToreus2.position.x = SINGULARITY+MODS.DOPPLER+XPOS_2
         pToreus2.material = magenta
         pToreus1.material = magenta // p is for pLASMA
 
@@ -202,8 +202,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const oToreus2 = BABYLON.MeshBuilder.CreateTorus('oToreus2', TOREUS(waveForms[6].current, theThiccness), scene)
         oToreus1.position.y = MODS.Y_ROOT-0.05
         oToreus2.position.y = MODS.Y_ROOT-0.05
-        oToreus1.position.x = SINGULARITY+(DOPPLER+DOPPLER)+XPOS_1
-        oToreus2.position.x = SINGULARITY+(DOPPLER+DOPPLER)+XPOS_2
+        oToreus1.position.x = SINGULARITY+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1
+        oToreus2.position.x = SINGULARITY+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2
         oToreus2.material = purple
         oToreus1.material = purple // o is for oMEGA
 
