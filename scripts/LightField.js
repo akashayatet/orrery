@@ -1,5 +1,8 @@
-window.addEventListener('DOMContentLoaded', () => {
+import Modifiers from './util/Modifiers.js'
 
+
+window.addEventListener('DOMContentLoaded', () => {
+    console.debug(Modifiers)
     // Constants
     const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
     const XMASTER = 2
@@ -96,13 +99,13 @@ window.addEventListener('DOMContentLoaded', () => {
     // Waveforms
     const rateOfChange = 0.042
     const waveForms = [
-        {current: 00, limit: 12, peaked: false},
+        {current: 0, limit: 12, peaked: false},
         {current: 13, limit: 13, peaked: false},
-        {current: 00, limit: 14, peaked: false},
+        {current: 0, limit: 14, peaked: false},
         {current: 15, limit: 15, peaked: false},
-        {current: 00, limit: 16, peaked: false},
+        {current: 0, limit: 16, peaked: false},
         {current: 17, limit: 17, peaked: false},
-        {current: 00, limit: 18, peaked: false}
+        {current: 0, limit: 18, peaked: false}
     ]
 
     // Generate scene
@@ -255,10 +258,10 @@ window.addEventListener('DOMContentLoaded', () => {
         waveForms.forEach(wave => {
             if (!(wave.current >= wave.limit) && !wave.peaked) {
                 wave.current += rateOfChange
-            } else if (wave.peaked && wave.current > 00) {
+            } else if (wave.peaked && wave.current > 0) {
                 wave.current -= rateOfChange
             } else {
-                wave.peaked = !(wave.current <= 00)
+                wave.peaked = !(wave.current <= 0)
             }
         })
         
