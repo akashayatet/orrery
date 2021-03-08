@@ -5,7 +5,6 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Modifiers & Constants
     let MODS;
-    // let SINGULARITY = 0     /* The heart of all things */
     const MERKABA = {       /* Alpha Values for each MerKahBah Spectrum Band */
         BLCK: {
             ALPHA: 1.00,
