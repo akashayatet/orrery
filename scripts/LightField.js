@@ -2,14 +2,9 @@ import Modifiers from './util/Modifiers.js'
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    console.debug(Modifiers)
-    // Constants
-    const RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) } /* Verbosity bump */
-    const XMASTER = 2
-    const XPOS_1 = -XMASTER
-    const XPOS_2 = +XMASTER
-    const A_ALIAS = 1       /* Anti-aliasing Preference */
-    const COMPLEXITY = 12   /* Tesselations of the Torai and Segments of the Sphera */
+    
+    // Modifiers & Constants
+    let MODS;
     const SUPERPOS = 1      /* Y Axis Superposition value */
     const DIA_A = 2         /* Alpha Diameter */
     const DOPPLER = 0.00     /* Anaglyph Red/Blue shift intensity */
@@ -44,33 +39,21 @@ window.addEventListener('DOMContentLoaded', () => {
             COLOR: new BABYLON.Color3.Magenta()
         }
     }
-    const PROTOGLYPH = {    /* Constellation Approximation & Codex Addressing */
-        /* Duo-Symmetrics (Position and Orientation Dominant) */
-        BA: '\.', EL: '\:', IA: '\|',
-        QU: '\°', UR: '\•', ET: '\=',
 
-        /* Non-Symmetrics (Orientation Dominant) */
-        VeK: '\/', TaR: '\\', GaTH: '\~',
-
-        /* Uni-Symmetrics (S = sun | M = moon ::: Position Dominant) */
-        NY: {S: '\}', M: '\{'}, 
-        OM: {S: '\)', M: '\('}, 
-        VU: {S: '\]', M: '\['},
-    }
+    // TODO: Replace with Toreus class; the following should be returned by OBJECT.getGeometry()
     const TOREUS = (diame, thicc, tessells) => {
         const TOREUS_GEO = {
             diameter: DIA_A + (diame ? diame : 0),
-            thickness: (RAD(DIA_A)*12) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
-            tessellation: COMPLEXITY + (tessells ? tessells : 0)/* Tesselations will also affect color depth */
+            thickness: (new Modifiers().RAD(DIA_A)*12) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
+            tessellation: new Modifiers().TOREUS_T + (tessells ? tessells : 0)/* Tesselations will also affect color depth */
         }
         return TOREUS_GEO
     }
+
+    // TODO: Replace with Sphera class; the following should be returned by OBJECT.getGeometry()
     const SPHERA_GEO = {
         diameter: DIA_A*0.618,   /* Should be sized to match a subset ratio of a Toreus boundary */
-        segments: COMPLEXITY
-    }
-    const RAYARC_GEO = {                /* Hybrid geometry of a Ray and Arc|Curve */
-
+        segments: new Modifiers().SPHERA_S
     }
 
     // Target the mindfield
@@ -79,9 +62,9 @@ window.addEventListener('DOMContentLoaded', () => {
     mField.height = window.innerHeight
 
     // Create GPU Engine
-    const engine = new BABYLON.Engine(mField, A_ALIAS)
+    const engine = new BABYLON.Engine(mField, Modifiers.A_ALIAS)
 
-    // Oscillation Tuning
+    // --- Oscillation Tuning  & Experiments --- \\
     // Rotation
     const baseRot = 1
     let alphaRot = baseRot
@@ -107,19 +90,25 @@ window.addEventListener('DOMContentLoaded', () => {
         {current: 17, limit: 17, peaked: false},
         {current: 0, limit: 18, peaked: false}
     ]
+    // --- Oscillation Tuning  & Experiments --- \\
 
     // Generate scene
     const createScene = () => {
         let scene = new BABYLON.Scene(engine)
         scene.clearColor = new BABYLON.Color3.Black()
 
+        // Instantiate Modifiers for this scene
+        MODS = new Modifiers(scene)
+
+        // Scene-specific Values
+        const XPOS_1 = -MODS.X_ROOT
+        const XPOS_2 = +MODS.X_ROOT
+
         // TargetCamera and sphere shapes produce the pseudo-2D top-down view of circles
         const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 36, 0), scene)
-        // This targets the eye to scene origin
         eye.setTarget(new BABYLON.Vector3(15, -720, 0))
-        // eye.rotation = new 
 
-        // Generate Protoglyphics
+        // Generate Protoglyphics (if needed)
 
         // Generate the Rayarc, Toreus & Spheras for the Ayat
         /* THE AYAT * The sun and moon aspects of the three elements; the organs of the atet.

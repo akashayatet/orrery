@@ -14,7 +14,7 @@ class Modifiers {
     A_ALIAS     = true
 
     /* Shape Complexity Modifiers */
-    TOREUS_T    = 27    // Tesselations
+    TOREUS_T    = 12    // Tesselations
     SPHERA_S    = 12    // Segments
     OMEGA_DIA   = 2     // Global Diameter Ratio Constant
 
@@ -73,7 +73,7 @@ class Modifiers {
         }
     }
     
-    
+
     constructor (targetScene) {
         this._scene = targetScene
     }
