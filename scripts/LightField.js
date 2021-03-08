@@ -267,6 +267,6 @@ window.addEventListener('DOMContentLoaded', () => {
       })
 
       // •)) Synesthesia ~~
-      const synth = new Tone.Synth().toDestination()
-      synth.triggerAttackRelease("C4", "8n")
+    //   const synth = new Tone.Synth().toDestination()
+    //   synth.triggerAttackRelease("C4", "8n")
 })
