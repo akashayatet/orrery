@@ -1,7 +1,6 @@
-import Modifiers from "../util/Modifiers";
+import Modifiers from "../util/Modifiers.js";
 
-
-export default class Toreus {
+class Toreus {
 
     // Public Properties
     name = ''
@@ -14,8 +13,14 @@ export default class Toreus {
     _scene = ''
 
     // methods
-    get = () => {return this /* Refactor to select this mesh from it's scene by name; otherwise redundant */}
+    rotate = (orientation) => {} 
+    x = (newX) => {this._mesh.position.x = Modifiers.X_ROOT + newX}
+    y = (newY) => {this._mesh.position.y = Modifiers.Y_ROOT + newY}
+    z = (newZ) => {}
     kill = () => {this._mesh.dispose()}
+    getMesh = () => {return this._mesh /* Refactor to select this mesh from it's scene by name; otherwise redundant */}
+    setColor = (colorName) => {this._mesh.material = Modifiers[colorName.toUpperCase()].MATTER}
+    duplicate = (newName, newScene) => {return new Toreus(this.diameter, this.thickness, this.tesselation, newName, newScene)}
 
     constructor (diameter, thickness, tesselation, tName, targetScene) {
 
@@ -32,3 +37,4 @@ export default class Toreus {
         this._mesh = BABYLON.MeshBuilder.CreateTorus(tName, geometry, targetScene)
     }
 }
+export default Toreus

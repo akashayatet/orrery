@@ -1,4 +1,4 @@
-export default class Modifiers {
+class Modifiers {
     /* Verbosity bump of inbuilt Babylon method - converts degrees to radians */
     RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) }
 
@@ -26,19 +26,19 @@ export default class Modifiers {
             material.emissiveColor = spectrum
             return material
         },
-        BLCK: {
+        BLACK: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Purple(), // May need to be diffuseColor instead
             SOUND: '',
             MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
         },
-        WHTE: {
+        WHITE: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.White(), // May need to be diffuseColor instead
             SOUND: '',
             MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
         },
-        YLLW: {
+        YELLOW: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Yellow(), // May need to be diffuseColor instead
             SOUND: '',
@@ -56,13 +56,13 @@ export default class Modifiers {
             SOUND: '',
             MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
         },
-        MGNT: {
+        MAGENTA: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Red(), // May need to be diffuseColor instead
             SOUND: '',
             MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
         },
-        PURP: {
+        PURPLE: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Magenta(), // May need to be diffuseColor instead
             SOUND: '',
@@ -76,3 +76,4 @@ export default class Modifiers {
         return this
     }
 }
+export default Modifiers
