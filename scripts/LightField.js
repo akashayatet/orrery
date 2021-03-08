@@ -5,8 +5,6 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Modifiers & Constants
     let MODS;
-    // const SUPERPOS = 1      /* Y Axis Superposition value */
-    const DIA_A = 2         /* Alpha Diameter */
     const DOPPLER = 0.00     /* Anaglyph Red/Blue shift intensity */
     let SINGULARITY = 0     /* The heart of all things */
     const MERKABA = {       /* Alpha Values for each MerKahBah Spectrum Band */
@@ -43,8 +41,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // TODO: Replace with Toreus class; the following should be returned by OBJECT.getGeometry()
     const TOREUS = (diame, thicc, tessells) => {
         const TOREUS_GEO = {
-            diameter: DIA_A + (diame ? diame : 0),
-            thickness: (new Modifiers().RAD(DIA_A)*12) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
+            diameter: new Modifiers().OMEGA_DIA + (diame ? diame : 0),
+            thickness: (new Modifiers().RAD(new Modifiers().OMEGA_DIA)*12) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
             tessellation: new Modifiers().TOREUS_T + (tessells ? tessells : 0)/* Tesselations will also affect color depth */
         }
         return TOREUS_GEO
@@ -52,7 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // TODO: Replace with Sphera class; the following should be returned by OBJECT.getGeometry()
     const SPHERA_GEO = {
-        diameter: DIA_A*0.618,   /* Should be sized to match a subset ratio of a Toreus boundary */
+        diameter: new Modifiers().OMEGA_DIA*0.618,   /* Should be sized to match a subset ratio of a Toreus boundary */
         segments: new Modifiers().SPHERA_S
     }
 
