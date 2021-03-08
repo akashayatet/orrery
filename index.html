@@ -38,16 +38,19 @@
   <div id="placard-can"><p>}°{ D U A L I T Y .:.</p></div>
 
   <!-- When a person downloads this app, an ayatNFT is generated to confirm it's from Akashayatet -->
-
   <!-- Global Libraries & Scripts -->
-  <script src="libs/modernizr-3.11.4.min.js"></script>
   <script src="https://unpkg.com/babylonjs@4.2.0/babylon.js"></script>
   <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
   <script src="https://unpkg.com/matter-js@0.16.1/build/matter.js"></script>
   <script src="https://unpkg.com/brain.js@2.0.0-beta.2/dist/brain-browser.min.js"></script>
 
+  <!-- Modules -->
+  <script src="scripts/util/Modifiers.js" type="module"></script>
+  <script src="scripts/classes/Toreus.js" type="module"></script>
+
   <!-- Core Code -->
-  <script data-main="scripts/main" src="scripts/mind.js"></script>
+  <script type="module" src="scripts/LightField.js"></script>
+
 </body>
 
 </html>
