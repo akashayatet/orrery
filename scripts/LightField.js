@@ -5,7 +5,8 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Modifiers & Constants
     let MODS;
-    const MERKABA = {       /* Alpha Values for each MerKahBah Spectrum Band */
+    const MERKABA = { /* Alpha Values for each MerKahBah Spectrum Band */
+    // WARNING: Moving this to Modifiers.js breaks Babylon for some unknown reason. Keep here for now.
         BLCK: {
             ALPHA: 1.00,
             COLOR: new BABYLON.Color3.Purple()

@@ -21,55 +21,54 @@ class Modifiers {
     /* Red|Blue Shifters */
     DOPPLER     = 0.00  // Anaglyph depth
 
-    /* Merkabah Spectrum Color & Material Constants */
+    /* Merkabah Spectrum Color & Material Constants WARN: This breaks Babylon for some reason DO NOT USE*/
     MERKABA = {       
-        _MATERIAL: (_spectrum, _energy, targetScene) => {
-            const material = new BABYLON.StandardMaterial(targetScene)
-            material.alpha = energy
-            material.emissiveColor = spectrum
-            return material
-        },
         BLACK: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Purple(), // May need to be diffuseColor instead
             SOUND: '',
-            MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
+            MATTER: () => {
+                const black = new BABYLON.StandardMaterial(this._scene)
+                black.alpha = ENERGY
+                black.emissiveColor = LIGHT
+                return black
+            }
         },
         WHITE: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.White(), // May need to be diffuseColor instead
             SOUND: '',
-            MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
+            MATTER: () => {return _MATERIAL(LIGHT, ENERGY, this._scene)}
         },
         YELLOW: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Yellow(), // May need to be diffuseColor instead
             SOUND: '',
-            MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
+            MATTER: () => {return _MATERIAL(LIGHT, ENERGY, this._scene)}
         },
         BLUE: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Blue(), // May need to be diffuseColor instead
             SOUND: '',
-            MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
+            MATTER: () => {return _MATERIAL(LIGHT, ENERGY, this._scene)}
         },
         TEAL: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Teal(), // May need to be diffuseColor instead
             SOUND: '',
-            MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
+            MATTER: () => {return _MATERIAL(LIGHT, ENERGY, this._scene)}
         },
         MAGENTA: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Red(), // May need to be diffuseColor instead
             SOUND: '',
-            MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
+            MATTER: () => {return _MATERIAL(LIGHT, ENERGY, this._scene)}
         },
         PURPLE: {
             ENERGY: 1.00,
             LIGHT: new BABYLON.Color3.Magenta(), // May need to be diffuseColor instead
             SOUND: '',
-            MATTER: (targetScene) => {return _MATERIAL(this.LIGHT, this.ENERGY, targetScene)}
+            MATTER: () => {return _MATERIAL(LIGHT, ENERGY, this._scene)}
         }
     }
     
