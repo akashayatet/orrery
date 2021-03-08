@@ -1,4 +1,4 @@
-import Modifiers from './util/Modifiers.js'
+import Modifiers from "./util/Modifiers.js"
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -81,7 +81,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Create GPU Engine
     const engine = new BABYLON.Engine(mField, A_ALIAS)
 
-    // Oscillation Tuning
+    // --- Oscillation Tuning --- \\
     // Rotation
     const baseRot = 1
     let alphaRot = baseRot
@@ -98,6 +98,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Waveforms
     const rateOfChange = 0.042
+    
+    // Instantiate TransformNodes to manifest movement of forms
     const waveForms = [
         {current: 0, limit: 12, peaked: false},
         {current: 13, limit: 13, peaked: false},

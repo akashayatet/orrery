@@ -73,7 +73,7 @@ class Modifiers {
         }
     }
     
-    
+
     constructor (targetScene) {
         this._scene = targetScene
     }
