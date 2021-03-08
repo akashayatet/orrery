@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Modifiers & Constants
     let MODS;
-    const SUPERPOS = 1      /* Y Axis Superposition value */
+    // const SUPERPOS = 1      /* Y Axis Superposition value */
     const DIA_A = 2         /* Alpha Diameter */
     const DOPPLER = 0.00     /* Anaglyph Red/Blue shift intensity */
     let SINGULARITY = 0     /* The heart of all things */
@@ -142,8 +142,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // Akali Atet Toreus - Black / Death
         const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus1', TOREUS(waveForms[0].current, theThiccness), scene)
         const nToreus2 = BABYLON.MeshBuilder.CreateTorus('nToreus2', TOREUS(waveForms[0].current, theThiccness), scene)
-        nToreus1.position.y = SUPERPOS+0
-        nToreus2.position.y = SUPERPOS+0
+        nToreus1.position.y = MODS.Y_ROOT+0
+        nToreus2.position.y = MODS.Y_ROOT+0
         nToreus1.position.x = SINGULARITY+XPOS_1
         nToreus2.position.x = SINGULARITY+XPOS_2
         nToreus2.material = black
@@ -152,8 +152,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // Akosh Atet Toreus - White / Life
         const gToreus1 = BABYLON.MeshBuilder.CreateTorus('gToreus1', TOREUS(waveForms[1].current, theThiccness), scene)
         const gToreus2 = BABYLON.MeshBuilder.CreateTorus('gToreus2', TOREUS(waveForms[1].current, theThiccness), scene)
-        gToreus1.position.y = SUPERPOS+0.01
-        gToreus2.position.y = SUPERPOS+0.01
+        gToreus1.position.y = MODS.Y_ROOT+0.01
+        gToreus2.position.y = MODS.Y_ROOT+0.01
         gToreus1.position.x = SINGULARITY+DOPPLER+XPOS_1
         gToreus2.position.x = SINGULARITY-DOPPLER+XPOS_2
         gToreus2.material = white
@@ -162,8 +162,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // Aura Atet Toreus - Yellow / Air / Subliminal
         const mToreus1 = BABYLON.MeshBuilder.CreateTorus('mToreus1', TOREUS(waveForms[2].current, theThiccness), scene)
         const mToreus2 = BABYLON.MeshBuilder.CreateTorus('mToreus2', TOREUS(waveForms[2].current, theThiccness), scene)
-        mToreus1.position.y = SUPERPOS-0.01
-        mToreus2.position.y = SUPERPOS-0.01
+        mToreus1.position.y = MODS.Y_ROOT-0.01
+        mToreus2.position.y = MODS.Y_ROOT-0.01
         mToreus1.position.x = SINGULARITY+(DOPPLER+DOPPLER)+XPOS_1
         mToreus2.position.x = SINGULARITY+(DOPPLER+DOPPLER)+XPOS_2
         mToreus2.material = yellow
@@ -172,8 +172,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // Cryo Atet Toreus - Blue / Water / Darkness
         const aToreus1 = BABYLON.MeshBuilder.CreateTorus('aToreus1', TOREUS(waveForms[3].current, theThiccness), scene)
         const aToreus2 = BABYLON.MeshBuilder.CreateTorus('aToreus2', TOREUS(waveForms[3].current, theThiccness), scene)
-        aToreus1.position.y = SUPERPOS-0.02
-        aToreus2.position.y = SUPERPOS-0.02
+        aToreus1.position.y = MODS.Y_ROOT-0.02
+        aToreus2.position.y = MODS.Y_ROOT-0.02
         aToreus1.position.x = SINGULARITY-(DOPPLER+DOPPLER)+XPOS_1
         aToreus2.position.x = SINGULARITY-(DOPPLER+DOPPLER)+XPOS_2
         aToreus2.material = blue
@@ -182,8 +182,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // Zero Atet Toreus - Teal / Vaccuum / Plenum
         const zToreus2 = BABYLON.MeshBuilder.CreateTorus('cToreus2', TOREUS(waveForms[4].current, theThiccness), scene)
         const zToreus1 = BABYLON.MeshBuilder.CreateTorus('cToreus1', TOREUS(waveForms[4].current, theThiccness), scene)
-        zToreus1.position.y = SUPERPOS-0.03
-        zToreus2.position.y = SUPERPOS-0.03
+        zToreus1.position.y = MODS.Y_ROOT-0.03
+        zToreus2.position.y = MODS.Y_ROOT-0.03
         zToreus1.position.x = SINGULARITY-DOPPLER+XPOS_1
         zToreus2.position.x = SINGULARITY-DOPPLER+XPOS_2
         zToreus2.material = teal
@@ -192,8 +192,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // Pyro Atet Toreus - Magenta / Fire / Light
         const pToreus1 = BABYLON.MeshBuilder.CreateTorus('pToreus1', TOREUS(waveForms[5].current, theThiccness), scene)
         const pToreus2 = BABYLON.MeshBuilder.CreateTorus('pToreus2', TOREUS(waveForms[5].current, theThiccness), scene)
-        pToreus1.position.y = SUPERPOS-0.04
-        pToreus2.position.y = SUPERPOS-0.04
+        pToreus1.position.y = MODS.Y_ROOT-0.04
+        pToreus2.position.y = MODS.Y_ROOT-0.04
         pToreus1.position.x = SINGULARITY+DOPPLER+XPOS_1
         pToreus2.position.x = SINGULARITY+DOPPLER+XPOS_2
         pToreus2.material = magenta
@@ -202,8 +202,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // Zon Atet Toreus - Purple / Chaos / Transmutation             -- Synchro --
         const oToreus1 = BABYLON.MeshBuilder.CreateTorus('oToreus1', TOREUS(waveForms[6].current, theThiccness), scene)
         const oToreus2 = BABYLON.MeshBuilder.CreateTorus('oToreus2', TOREUS(waveForms[6].current, theThiccness), scene)
-        oToreus1.position.y = SUPERPOS-0.05
-        oToreus2.position.y = SUPERPOS-0.05
+        oToreus1.position.y = MODS.Y_ROOT-0.05
+        oToreus2.position.y = MODS.Y_ROOT-0.05
         oToreus1.position.x = SINGULARITY+(DOPPLER+DOPPLER)+XPOS_1
         oToreus2.position.x = SINGULARITY+(DOPPLER+DOPPLER)+XPOS_2
         oToreus2.material = purple
@@ -215,18 +215,16 @@ window.addEventListener('DOMContentLoaded', () => {
         // Akosh Atet Sphera - White / Life
         const gSphera1 = BABYLON.MeshBuilder.CreateSphere('gSphera', SPHERA_GEO, scene)
         const gSphera2 = BABYLON.MeshBuilder.CreateSphere('gSphera', SPHERA_GEO, scene)
-        gSphera1.position.y = SUPERPOS
-        gSphera2.position.y = SUPERPOS
+        gSphera1.position.y = MODS.Y_ROOT
+        gSphera2.position.y = MODS.Y_ROOT
         gSphera1.position.x = XPOS_1
         gSphera2.position.x = XPOS_2
         gSphera2.material = white
         gSphera1.material = white // g is for gAIA
 
-
         // Zon Sphera
         // Akali Rayarc
         // Akosh Rayarc
-
         // Zon Rayarc
 
         return scene
