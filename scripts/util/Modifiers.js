@@ -1,4 +1,7 @@
 class Modifiers {
+    // The target scene for a given Modifiers instance
+    _scene = ''
+
     /* Verbosity bump of inbuilt Babylon method - converts degrees to radians */
     RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) }
 
@@ -70,10 +73,9 @@ class Modifiers {
         }
     }
     
-    // Placed at EOF for emphasis on properties as these are meant to be called directly
-    constructor () {
-        console.warn('The Modifiers class is not intended to be instantiated via constructor.')
-        return this
+    
+    constructor (targetScene) {
+        this._scene = targetScene
     }
 }
 export default Modifiers
