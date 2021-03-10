@@ -196,14 +196,14 @@ window.addEventListener('DOMContentLoaded', () => {
         zToreus1.matter(teal) // z is for zERO-POINT
 
         // Pyro Atet Toreus - Magenta / Fire / Light
-        const pToreus1 = BABYLON.MeshBuilder.CreateTorus('pToreus1', TOREUS(waveForms[5].current, theThiccness), scene)
-        const pToreus2 = BABYLON.MeshBuilder.CreateTorus('pToreus2', TOREUS(waveForms[5].current, theThiccness), scene)
-        pToreus1.position.y = MODS.Y_ROOT-0.04
-        pToreus2.position.y = MODS.Y_ROOT-0.04
-        pToreus1.position.x = MODS.X_ROOT+MODS.DOPPLER+XPOS_1
-        pToreus2.position.x = MODS.X_ROOT+MODS.DOPPLER+XPOS_2
-        pToreus2.material = magenta
-        pToreus1.material = magenta // p is for pLASMA
+        const pToreus1 = new Toreus(waveForms[5].current, theThiccness, 0, 'pToreus1', scene)
+        const pToreus2 = new Toreus(waveForms[5].current, theThiccness, 0, 'pToreus2', scene)
+        pToreus1.y(-0.04)
+        pToreus2.y(-0.04)
+        pToreus1.x(MODS.DOPPLER+XPOS_1)
+        pToreus2.x(MODS.DOPPLER+XPOS_2)
+        pToreus2.matter(magenta)
+        pToreus1.matter(magenta) // p is for pLASMA
 
         // Zon Atet Toreus - Purple / Chaos / Transmutation             -- Synchro --
         const oToreus1 = BABYLON.MeshBuilder.CreateTorus('oToreus1', TOREUS(waveForms[6].current, theThiccness), scene)
