@@ -166,14 +166,14 @@ window.addEventListener('DOMContentLoaded', () => {
         gToreus1.matter(white) // g is for gAIA
 
         // Aura Atet Toreus - Yellow / Air / Subliminal
-        const mToreus1 = BABYLON.MeshBuilder.CreateTorus('mToreus1', TOREUS(waveForms[2].current, theThiccness), scene)
-        const mToreus2 = BABYLON.MeshBuilder.CreateTorus('mToreus2', TOREUS(waveForms[2].current, theThiccness), scene)
-        mToreus1.position.y = MODS.Y_ROOT-0.01
-        mToreus2.position.y = MODS.Y_ROOT-0.01
-        mToreus1.position.x = MODS.X_ROOT+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1
-        mToreus2.position.x = MODS.X_ROOT+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2
-        mToreus2.material = yellow
-        mToreus1.material = yellow // m is for mAIA
+        const mToreus1 = new Toreus(waveForms[2].current, theThiccness, 0, 'mToreus1', scene)
+        const mToreus2 = new Toreus(waveForms[2].current, theThiccness, 0, 'mToreus2', scene)
+        mToreus1.y(-0.01)
+        mToreus2.y(-0.01)
+        mToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
+        mToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+        mToreus2.matter(yellow)
+        mToreus1.matter(yellow) // m is for mAIA
 
         // Cryo Atet Toreus - Blue / Water / Darkness
         const aToreus1 = BABYLON.MeshBuilder.CreateTorus('aToreus1', TOREUS(waveForms[3].current, theThiccness), scene)
