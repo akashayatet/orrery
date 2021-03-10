@@ -38,16 +38,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // TODO: Replace with Toreus class; the following should be returned by OBJECT.getGeometry()
-    const TOREUS = (diame, thicc, tessells) => {
-        const TOREUS_GEO = {
-            diameter: new Modifiers().OMEGA_DIA + (diame ? diame : 0),
-            thickness: (new Modifiers().RAD(new Modifiers().OMEGA_DIA)*new Modifiers().TOREUS_T) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
-            tessellation: new Modifiers().TOREUS_T + (tessells ? tessells : 0)/* Tesselations will also affect color depth */
-        }
-        return TOREUS_GEO
-    }
-
     // TODO: Replace with Sphera class; the following should be returned by OBJECT.getGeometry()
     const SPHERA_GEO = {
         diameter: new Modifiers().OMEGA_DIA*0.618,   /* Should be sized to match a subset ratio of a Toreus boundary */
