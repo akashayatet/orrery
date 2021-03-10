@@ -6,7 +6,7 @@ class Modifiers {
     RAD = (fromDegrees) => { return BABYLON.Tools.ToRadians(fromDegrees) }
 
     /* Global/Scene X & Y Axis Roots */
-    X_ROOT      = 2
+    X_ROOT      = 1
     Y_ROOT      = 1
     Z_ROOT      = 0     // Global Center in case of top-down only view
 
@@ -14,7 +14,7 @@ class Modifiers {
     A_ALIAS     = true
 
     /* Shape Complexity Modifiers */
-    TOREUS_T    = 12    // Tesselations
+    TOREUS_T    = 27    // Tesselations
     SPHERA_S    = 12    // Segments
     OMEGA_DIA   = 2     // Global Diameter Ratio Constant
 

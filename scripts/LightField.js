@@ -56,21 +56,26 @@ window.addEventListener('DOMContentLoaded', () => {
     // TODO: Instantiate TransformNodes to manifest movement of forms
 
     // Spin
-    const spinRate = 0.27
-    let alphaRotation = 1
-    let betaRotation = 1
-    let gammaRotation = 1
+    const spinRate = 0.1
+    const spinMods = new Modifiers()
+    let alphaRotation = spinMods.RAD(90)
+    let alphaModulate = 0
+    let betaRotation = 0
+    let betaModulate = 0 
+    let gammaRotation = 0
+    let gammaModulate = 0
 
     // Waveforms
-    const rateOfChange = 0.042
+    const rateOfChange = Math.random() * 0.22
+    const terminus = 72
     const waveForms = [
-        {current: 0, limit: 12, peaked: false},
-        {current: 0, limit: 13, peaked: false},
-        {current: 0, limit: 14, peaked: false},
-        {current: 0, limit: 15, peaked: false},
-        {current: 0, limit: 16, peaked: false},
-        {current: 0, limit: 17, peaked: false},
-        {current: 0, limit: 18, peaked: false}
+        {current: Math.floor(Math.random() * 9), limit: Math.floor(Math.random() * terminus), peaked: false},
+        {current: Math.floor(Math.random() * 9), limit: Math.floor(Math.random() * terminus), peaked: false},
+        {current: Math.floor(Math.random() * 9), limit: Math.floor(Math.random() * terminus), peaked: false},
+        {current: Math.floor(Math.random() * 9), limit: Math.floor(Math.random() * terminus), peaked: false},
+        {current: Math.floor(Math.random() * 9), limit: Math.floor(Math.random() * terminus), peaked: false},
+        {current: Math.floor(Math.random() * 9), limit: Math.floor(Math.random() * terminus), peaked: false},
+        {current: Math.floor(Math.random() * 9), limit: Math.floor(Math.random() * terminus), peaked: false}
     ]
     // --- Oscillation Tuning  & Experiments --- \\
 
@@ -86,13 +91,11 @@ window.addEventListener('DOMContentLoaded', () => {
         const XPOS_1 = -MODS.X_ROOT
         const XPOS_2 = +MODS.X_ROOT
 
-        // TargetCamera and sphere shapes produce the pseudo-2D top-down view of circles
-        const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 36, 0), scene)
-        eye.setTarget(new BABYLON.Vector3(MODS.RAD(90), -720, 0))
-
         // Configure orthographic view
+        const viewDistance = 72
+        const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, viewDistance, 0), scene)
+        eye.setTarget(new BABYLON.Vector3(MODS.RAD(90), 0, 0))
         eye.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA
-        const viewDistance = 37
         const aspectRatio = mField.height / mField.width
         const lrFactor = 2 
         eye.orthoLeft = -viewDistance / lrFactor;
@@ -130,11 +133,13 @@ window.addEventListener('DOMContentLoaded', () => {
         purple.emissiveColor = MERKABA.PURP.COLOR
         
         let theThiccness = 0.22
+        let rFactor = 0
 
         // Akali Atet Toreus - Black / Death ::: n is for nULL
         // const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus1', TOREUS(waveForms[0].current, theThiccness), scene)
         const nToreus1 = new Toreus(waveForms[0].current, theThiccness, 0, 'nToreus1', scene)
         const nToreus2 = new Toreus(waveForms[0].current, theThiccness, 0, 'nToreus2', scene)
+        const nRotation = rFactor
         if (waveForms[0].peaked) {
             nToreus1.kill()
             nToreus2.kill()
@@ -143,10 +148,18 @@ window.addEventListener('DOMContentLoaded', () => {
             nToreus2.y(0)
             nToreus1.x(XPOS_1)
             nToreus2.x(XPOS_2)
-            nToreus1.rotate(0, 0, 0)
-            nToreus2.rotate(0, 0, 0)
-            nToreus2.matter(black)
+            nToreus1.rotate(
+                nRotation + (alphaRotation / 2)+(alphaRotation+alphaModulate), 
+                nRotation + (betaRotation / 2)+(betaRotation+betaModulate), 
+                nRotation + (gammaRotation / 2)+(gammaRotation+gammaModulate)
+            )
+            nToreus2.rotate(
+                nRotation - ((alphaRotation / 2)+(alphaRotation+alphaModulate)), 
+                nRotation - ((betaRotation / 2)+(betaRotation+betaModulate)), 
+                nRotation - ((gammaRotation / 2)+(gammaRotation+gammaModulate))
+            )
             nToreus1.matter(black)
+            nToreus2.matter(black)
         }
         // Figure out what these do and how to make them work
         // nToreus2.outlineColor = new BABYLON.Color3(1, 1, 1)
@@ -157,16 +170,25 @@ window.addEventListener('DOMContentLoaded', () => {
         // Akosh Atet Toreus - White / Life ::: g is for gAIA
         const gToreus1 = new Toreus(waveForms[1].current, theThiccness, 0, 'gToreus1', scene)
         const gToreus2 = new Toreus(waveForms[1].current, theThiccness, 0, 'gToreus2', scene)
+        const gRotation = nRotation + rFactor
         if (waveForms[1].peaked) {
             gToreus1.kill()
             gToreus2.kill()
         } else {
-            gToreus1.y(0.01)
-            gToreus2.y(0.01)
-            gToreus1.x(MODS.DOPPLER+XPOS_1)
-            gToreus2.x(MODS.DOPPLER+XPOS_2)
-            gToreus1.rotate(0, 0, 0)
-            gToreus2.rotate(0, 0, 0)
+            gToreus1.y(0)
+            gToreus2.y(0)
+            gToreus1.x(XPOS_1)
+            gToreus2.x(XPOS_2)
+            gToreus1.rotate(
+                gRotation + (alphaRotation / 2)+(alphaRotation+alphaModulate), 
+                gRotation + (betaRotation / 2)+(betaRotation+betaModulate), 
+                gRotation + (gammaRotation / 2)+(gammaRotation+gammaModulate)
+            )
+            gToreus2.rotate(
+                gRotation - ((alphaRotation / 2)+(alphaRotation+alphaModulate)), 
+                gRotation - ((betaRotation / 2)+(betaRotation+betaModulate)), 
+                gRotation - ((gammaRotation / 2)+(gammaRotation+gammaModulate))
+            )
             gToreus1.matter(white)
             gToreus2.matter(white)
         }
@@ -174,86 +196,131 @@ window.addEventListener('DOMContentLoaded', () => {
         // Aura Atet Toreus - Yellow / Air / Subliminal ::: m is for mAIA
         const mToreus1 = new Toreus(waveForms[2].current, theThiccness, 0, 'mToreus1', scene)
         const mToreus2 = new Toreus(waveForms[2].current, theThiccness, 0, 'mToreus2', scene)
+        const mRotation = gRotation + rFactor
         if (waveForms[2].peaked) {
             mToreus1.kill()
             mToreus2.kill()
         } else {
-            mToreus1.y(-0.01)
-            mToreus2.y(-0.01)
-            mToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
-            mToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
-            mToreus1.rotate(0, 0, 0)
-            mToreus2.rotate(0, 0, 0)
-            mToreus2.matter(yellow)
+            mToreus1.y(0)
+            mToreus2.y(0)
+            mToreus1.x(XPOS_1)
+            mToreus2.x(XPOS_2)
+            mToreus1.rotate(
+                mRotation + (alphaRotation / 2)+(alphaRotation+alphaModulate), 
+                mRotation + (betaRotation / 2)+(betaRotation+betaModulate), 
+                mRotation + (gammaRotation / 2)+(gammaRotation+gammaModulate)
+            )
+            mToreus2.rotate(
+                mRotation - ((alphaRotation / 2)+(alphaRotation+alphaModulate)), 
+                mRotation - ((betaRotation / 2)+(betaRotation+betaModulate)), 
+                mRotation - ((gammaRotation / 2)+(gammaRotation+gammaModulate))
+            )
             mToreus1.matter(yellow)
+            mToreus2.matter(yellow)
         }
 
         // Cryo Atet Toreus - Blue / Water / Darkness ::: a is for aBYSS
         const aToreus1 = new Toreus(waveForms[3].current, theThiccness, 0, 'aToreus1', scene)
         const aToreus2 = new Toreus(waveForms[3].current, theThiccness, 0, 'aToreus2', scene)
+        const aRotation = mRotation + rFactor
         if (waveForms[3].peaked) {
             aToreus1.kill()
             aToreus2.kill()
         } else {
-            aToreus1.y(-0.02)
-            aToreus2.y(-0.02)
-            aToreus1.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
-            aToreus2.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
-            aToreus1.rotate(0, 0, 0)
-            aToreus2.rotate(0, 0, 0)
-            aToreus2.matter(blue)
+            aToreus1.y(0)
+            aToreus2.y(0)
+            aToreus1.x(XPOS_1)
+            aToreus2.x(XPOS_2)
+            aToreus1.rotate(
+                aRotation + (alphaRotation / 2)+(alphaRotation+alphaModulate), 
+                aRotation + (betaRotation / 2)+(betaRotation+betaModulate), 
+                aRotation + (gammaRotation / 2)+(gammaRotation+gammaModulate)
+            )
+            aToreus2.rotate(
+                aRotation - ((alphaRotation / 2)+(alphaRotation+alphaModulate)), 
+                aRotation - ((betaRotation / 2)+(betaRotation+betaModulate)), 
+                aRotation - ((gammaRotation / 2)+(gammaRotation+gammaModulate))
+            )
             aToreus1.matter(blue)
+            aToreus2.matter(blue)
         }
 
         // Zero Atet Toreus - Teal / Vaccuum / Plenum ::: z is for zERO-POINT
         const zToreus1 = new Toreus(waveForms[4].current, theThiccness, 0, 'zToreus1', scene)
         const zToreus2 = new Toreus(waveForms[4].current, theThiccness, 0, 'zToreus2', scene)
+        const zRotation = aRotation + rFactor
         if (waveForms[4].peaked) {
             zToreus1.kill()
             zToreus2.kill()
         } else {
-            zToreus1.y(-0.03)
-            zToreus2.y(-0.03)
-            zToreus1.x(-MODS.DOPPLER+XPOS_1)
-            zToreus2.x(-MODS.DOPPLER+XPOS_2)
-            zToreus1.rotate(0, 0, 0)
-            zToreus2.rotate(0, 0, 0)
-            zToreus2.matter(teal)
+            zToreus1.y(0)
+            zToreus2.y(0)
+            zToreus1.x(XPOS_1)
+            zToreus2.x(XPOS_2)
+            zToreus1.rotate(
+                zRotation + (alphaRotation / 2)+(alphaRotation+alphaModulate), 
+                zRotation + (betaRotation / 2)+(betaRotation+betaModulate), 
+                zRotation + (gammaRotation / 2)+(gammaRotation+gammaModulate)
+            )
+            zToreus2.rotate(
+                zRotation - ((alphaRotation / 2)+(alphaRotation+alphaModulate)), 
+                zRotation - ((betaRotation / 2)+(betaRotation+betaModulate)), 
+                zRotation - ((gammaRotation / 2)+(gammaRotation+gammaModulate))
+            )
             zToreus1.matter(teal)
+            zToreus2.matter(teal)
         }
 
         // Pyro Atet Toreus - Magenta / Fire / Light ::: p is for pLASMA
         const pToreus1 = new Toreus(waveForms[5].current, theThiccness, 0, 'pToreus1', scene)
         const pToreus2 = new Toreus(waveForms[5].current, theThiccness, 0, 'pToreus2', scene)
+        const pRotation = zRotation + rFactor
         if (waveForms[5].peaked) {
             pToreus1.kill()
             pToreus2.kill()
         } else {
-            pToreus1.y(-0.04)
-            pToreus2.y(-0.04)
-            pToreus1.x(MODS.DOPPLER+XPOS_1)
-            pToreus2.x(MODS.DOPPLER+XPOS_2)
-            pToreus1.rotate(0, 0, 0)
-            pToreus2.rotate(0, 0, 0)
-            pToreus2.matter(magenta)
+            pToreus1.y(0)
+            pToreus2.y(0)
+            pToreus1.x(XPOS_1)
+            pToreus2.x(XPOS_2)
+            pToreus1.rotate(
+                pRotation + (alphaRotation / 2)+(alphaRotation+alphaModulate), 
+                pRotation + (betaRotation / 2)+(betaRotation+betaModulate), 
+                pRotation + (gammaRotation / 2)+(gammaRotation+gammaModulate)
+            )
+            pToreus2.rotate(
+                pRotation - ((alphaRotation / 2)+(alphaRotation+alphaModulate)), 
+                pRotation - ((betaRotation / 2)+(betaRotation+betaModulate)), 
+                pRotation - ((gammaRotation / 2)+(gammaRotation+gammaModulate))
+            )
             pToreus1.matter(magenta)
+            pToreus2.matter(magenta)
         }
 
         // Zon Atet Toreus - Purple / Chaos / Transmutation ::: o is for oMEGA
         const oToreus1 = new Toreus(waveForms[6].current, theThiccness, 0, 'oToreus1', scene)
         const oToreus2 = new Toreus(waveForms[6].current, theThiccness, 0, 'oToreus2', scene)
+        const oRotation = pRotation + rFactor
         if (waveForms[6].peaked) {
             oToreus1.kill()
             oToreus2.kill()
         } else {
-            oToreus1.y(-0.05)
-            oToreus2.y(-0.05)
-            oToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
-            oToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
-            oToreus1.rotate(0, 0, 0)
-            oToreus2.rotate(0, 0, 0)
-            oToreus2.matter(purple)
+            oToreus1.y(0)
+            oToreus2.y(0)
+            oToreus1.x(XPOS_1)
+            oToreus2.x(XPOS_2)
+            oToreus1.rotate(
+                oRotation + (alphaRotation / 2)+(alphaRotation+alphaModulate), 
+                oRotation + (betaRotation / 2)+(betaRotation+betaModulate), 
+                oRotation + (gammaRotation / 2)+(gammaRotation+gammaModulate)
+            )
+            oToreus2.rotate(
+                oRotation - ((alphaRotation / 2)+(alphaRotation+alphaModulate)), 
+                oRotation - ((betaRotation / 2)+(betaRotation+betaModulate)), 
+                oRotation - ((gammaRotation / 2)+(gammaRotation+gammaModulate))
+            )
             oToreus1.matter(purple)
+            oToreus2.matter(purple)
         }
 
         // Akali Sphera
@@ -279,9 +346,9 @@ window.addEventListener('DOMContentLoaded', () => {
     engine.runRenderLoop(() => {
         // --- Transmutations --- \\
         // Spin|Energy
-        // alphaRotation += spinRate
-        // betaRotation += spinRate
-        // gammaRotation += spinRate
+        // alphaModulate += spinRate
+        // betaModulate += spinRate
+        // gammaModulate += spinRate
 
         // Expansion|Contraction
         waveForms.forEach(wave => {
