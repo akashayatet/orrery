@@ -1,3 +1,4 @@
+import Toreus from "./classes/Toreus.js";
 import Modifiers from "./util/Modifiers.js"
 
 
@@ -41,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const TOREUS = (diame, thicc, tessells) => {
         const TOREUS_GEO = {
             diameter: new Modifiers().OMEGA_DIA + (diame ? diame : 0),
-            thickness: (new Modifiers().RAD(new Modifiers().OMEGA_DIA)*12) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
+            thickness: (new Modifiers().RAD(new Modifiers().OMEGA_DIA)*new Modifiers().TOREUS_T) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
             tessellation: new Modifiers().TOREUS_T + (tessells ? tessells : 0)/* Tesselations will also affect color depth */
         }
         return TOREUS_GEO
@@ -139,74 +140,80 @@ window.addEventListener('DOMContentLoaded', () => {
         let theThiccness = 0.22
 
         // Akali Atet Toreus - Black / Death
-        const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus1', TOREUS(waveForms[0].current, theThiccness), scene)
-        const nToreus2 = BABYLON.MeshBuilder.CreateTorus('nToreus2', TOREUS(waveForms[0].current, theThiccness), scene)
-        nToreus1.position.y = MODS.Y_ROOT+0
-        nToreus2.position.y = MODS.Y_ROOT+0
-        nToreus1.position.x = MODS.X_ROOT+XPOS_1
-        nToreus2.position.x = MODS.X_ROOT+XPOS_2
-        nToreus2.material = black
-        nToreus1.material = black // n is for nULL
+        // const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus1', TOREUS(waveForms[0].current, theThiccness), scene)
+        const nToreus1 = new Toreus(waveForms[0].current, theThiccness, 0, 'nToreus1', scene)
+        const nToreus2 = new Toreus(waveForms[0].current, theThiccness, 0, 'nToreus2', scene)
+        nToreus1.y(0)
+        nToreus2.y(0)
+        nToreus1.x(XPOS_1)
+        nToreus2.x(XPOS_2)
+        // Figure out what these do and how to make them work
+        // nToreus2.outlineColor = new BABYLON.Color3(1, 1, 1)
+        // nToreus2.outlineWidth = 1
+        // overlayAlpha: 0.5
+        // overlayColor: {…}
+        nToreus2.matter(black)
+        nToreus1.matter(black) // n is for nULL
 
         // Akosh Atet Toreus - White / Life
-        const gToreus1 = BABYLON.MeshBuilder.CreateTorus('gToreus1', TOREUS(waveForms[1].current, theThiccness), scene)
-        const gToreus2 = BABYLON.MeshBuilder.CreateTorus('gToreus2', TOREUS(waveForms[1].current, theThiccness), scene)
-        gToreus1.position.y = MODS.Y_ROOT+0.01
-        gToreus2.position.y = MODS.Y_ROOT+0.01
-        gToreus1.position.x = MODS.X_ROOT+MODS.DOPPLER+XPOS_1
-        gToreus2.position.x = MODS.X_ROOT-MODS.DOPPLER+XPOS_2
-        gToreus2.material = white
-        gToreus1.material = white // g is for gAIA
+        const gToreus1 = new Toreus(waveForms[1].current, theThiccness, 0, 'gToreus1', scene)
+        const gToreus2 = new Toreus(waveForms[1].current, theThiccness, 0, 'gToreus2', scene)
+        gToreus1.y(0.01)
+        gToreus2.y(0.01)
+        gToreus1.x(MODS.DOPPLER+XPOS_1)
+        gToreus2.x(MODS.DOPPLER+XPOS_2)
+        gToreus2.matter(white)
+        gToreus1.matter(white) // g is for gAIA
 
         // Aura Atet Toreus - Yellow / Air / Subliminal
-        const mToreus1 = BABYLON.MeshBuilder.CreateTorus('mToreus1', TOREUS(waveForms[2].current, theThiccness), scene)
-        const mToreus2 = BABYLON.MeshBuilder.CreateTorus('mToreus2', TOREUS(waveForms[2].current, theThiccness), scene)
-        mToreus1.position.y = MODS.Y_ROOT-0.01
-        mToreus2.position.y = MODS.Y_ROOT-0.01
-        mToreus1.position.x = MODS.X_ROOT+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1
-        mToreus2.position.x = MODS.X_ROOT+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2
-        mToreus2.material = yellow
-        mToreus1.material = yellow // m is for mAIA
+        const mToreus1 = new Toreus(waveForms[2].current, theThiccness, 0, 'mToreus1', scene)
+        const mToreus2 = new Toreus(waveForms[2].current, theThiccness, 0, 'mToreus2', scene)
+        mToreus1.y(-0.01)
+        mToreus2.y(-0.01)
+        mToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
+        mToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+        mToreus2.matter(yellow)
+        mToreus1.matter(yellow) // m is for mAIA
 
         // Cryo Atet Toreus - Blue / Water / Darkness
-        const aToreus1 = BABYLON.MeshBuilder.CreateTorus('aToreus1', TOREUS(waveForms[3].current, theThiccness), scene)
-        const aToreus2 = BABYLON.MeshBuilder.CreateTorus('aToreus2', TOREUS(waveForms[3].current, theThiccness), scene)
-        aToreus1.position.y = MODS.Y_ROOT-0.02
-        aToreus2.position.y = MODS.Y_ROOT-0.02
-        aToreus1.position.x = MODS.X_ROOT-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1
-        aToreus2.position.x = MODS.X_ROOT-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2
-        aToreus2.material = blue
-        aToreus1.material = blue // a is for aBYSS
+        const aToreus1 = new Toreus(waveForms[3].current, theThiccness, 0, 'aToreus1', scene)
+        const aToreus2 = new Toreus(waveForms[3].current, theThiccness, 0, 'aToreus2', scene)
+        aToreus1.y(-0.02)
+        aToreus2.y(-0.02)
+        aToreus1.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
+        aToreus2.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+        aToreus2.matter(blue)
+        aToreus1.matter(blue) // a is for aBYSS
 
         // Zero Atet Toreus - Teal / Vaccuum / Plenum
-        const zToreus2 = BABYLON.MeshBuilder.CreateTorus('cToreus2', TOREUS(waveForms[4].current, theThiccness), scene)
-        const zToreus1 = BABYLON.MeshBuilder.CreateTorus('cToreus1', TOREUS(waveForms[4].current, theThiccness), scene)
-        zToreus1.position.y = MODS.Y_ROOT-0.03
-        zToreus2.position.y = MODS.Y_ROOT-0.03
-        zToreus1.position.x = MODS.X_ROOT-MODS.DOPPLER+XPOS_1
-        zToreus2.position.x = MODS.X_ROOT-MODS.DOPPLER+XPOS_2
-        zToreus2.material = teal
-        zToreus1.material = teal // z is for zERO-POINT
+        const zToreus1 = new Toreus(waveForms[4].current, theThiccness, 0, 'zToreus1', scene)
+        const zToreus2 = new Toreus(waveForms[4].current, theThiccness, 0, 'zToreus2', scene)
+        zToreus1.y(-0.03)
+        zToreus2.y(-0.03)
+        zToreus1.x(-MODS.DOPPLER+XPOS_1)
+        zToreus2.x(-MODS.DOPPLER+XPOS_2)
+        zToreus2.matter(teal)
+        zToreus1.matter(teal) // z is for zERO-POINT
 
         // Pyro Atet Toreus - Magenta / Fire / Light
-        const pToreus1 = BABYLON.MeshBuilder.CreateTorus('pToreus1', TOREUS(waveForms[5].current, theThiccness), scene)
-        const pToreus2 = BABYLON.MeshBuilder.CreateTorus('pToreus2', TOREUS(waveForms[5].current, theThiccness), scene)
-        pToreus1.position.y = MODS.Y_ROOT-0.04
-        pToreus2.position.y = MODS.Y_ROOT-0.04
-        pToreus1.position.x = MODS.X_ROOT+MODS.DOPPLER+XPOS_1
-        pToreus2.position.x = MODS.X_ROOT+MODS.DOPPLER+XPOS_2
-        pToreus2.material = magenta
-        pToreus1.material = magenta // p is for pLASMA
+        const pToreus1 = new Toreus(waveForms[5].current, theThiccness, 0, 'pToreus1', scene)
+        const pToreus2 = new Toreus(waveForms[5].current, theThiccness, 0, 'pToreus2', scene)
+        pToreus1.y(-0.04)
+        pToreus2.y(-0.04)
+        pToreus1.x(MODS.DOPPLER+XPOS_1)
+        pToreus2.x(MODS.DOPPLER+XPOS_2)
+        pToreus2.matter(magenta)
+        pToreus1.matter(magenta) // p is for pLASMA
 
         // Zon Atet Toreus - Purple / Chaos / Transmutation             -- Synchro --
-        const oToreus1 = BABYLON.MeshBuilder.CreateTorus('oToreus1', TOREUS(waveForms[6].current, theThiccness), scene)
-        const oToreus2 = BABYLON.MeshBuilder.CreateTorus('oToreus2', TOREUS(waveForms[6].current, theThiccness), scene)
-        oToreus1.position.y = MODS.Y_ROOT-0.05
-        oToreus2.position.y = MODS.Y_ROOT-0.05
-        oToreus1.position.x = MODS.X_ROOT+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1
-        oToreus2.position.x = MODS.X_ROOT+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2
-        oToreus2.material = purple
-        oToreus1.material = purple // o is for oMEGA
+        const oToreus1 = new Toreus(waveForms[6].current, theThiccness, 0, 'oToreus1', scene)
+        const oToreus2 = new Toreus(waveForms[6].current, theThiccness, 0, 'oToreus2', scene)
+        oToreus1.y(-0.05)
+        oToreus2.y(-0.05)
+        oToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
+        oToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+        oToreus2.matter(purple)
+        oToreus1.matter(purple) // o is for oMEGA
 
         // NOTE: No more than one sphera may be present in the core of a being
         // Akali Sphera
