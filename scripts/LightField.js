@@ -206,14 +206,14 @@ window.addEventListener('DOMContentLoaded', () => {
         pToreus1.matter(magenta) // p is for pLASMA
 
         // Zon Atet Toreus - Purple / Chaos / Transmutation             -- Synchro --
-        const oToreus1 = BABYLON.MeshBuilder.CreateTorus('oToreus1', TOREUS(waveForms[6].current, theThiccness), scene)
-        const oToreus2 = BABYLON.MeshBuilder.CreateTorus('oToreus2', TOREUS(waveForms[6].current, theThiccness), scene)
-        oToreus1.position.y = MODS.Y_ROOT-0.05
-        oToreus2.position.y = MODS.Y_ROOT-0.05
-        oToreus1.position.x = MODS.X_ROOT+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1
-        oToreus2.position.x = MODS.X_ROOT+(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2
-        oToreus2.material = purple
-        oToreus1.material = purple // o is for oMEGA
+        const oToreus1 = new Toreus(waveForms[6].current, theThiccness, 0, 'oToreus1', scene)
+        const oToreus2 = new Toreus(waveForms[6].current, theThiccness, 0, 'oToreus2', scene)
+        oToreus1.y(-0.05)
+        oToreus2.y(-0.05)
+        oToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
+        oToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+        oToreus2.matter(purple)
+        oToreus1.matter(purple) // o is for oMEGA
 
         // NOTE: No more than one sphera may be present in the core of a being
         // Akali Sphera
