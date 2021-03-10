@@ -53,24 +53,16 @@ window.addEventListener('DOMContentLoaded', () => {
     const engine = new BABYLON.Engine(mField, Modifiers.A_ALIAS)
 
     // --- Oscillation Tuning  & Experiments --- \\
-    // Rotation
-    const baseRot = 1
-    let alphaRot = baseRot
-    let betaRot = baseRot
-    let gammaRot = baseRot
-    const subFactor3 = 0.03
-    const subFactor6 = 0.06
-    const subFactor9 = 0.09
-    // ENTITY.rotation = new BABYLON.Vector3(
-    //     alphaRot*subFactor3, 
-    //     betaRot*subFactor6, 
-    //     gammaRot*subFactor9
-    // )
+    // TODO: Instantiate TransformNodes to manifest movement of forms
+
+    // Spin
+    const spinRate = 0.27
+    let alphaRotation = 1
+    let betaRotation = 1
+    let gammaRotation = 1
 
     // Waveforms
     const rateOfChange = 0.042
-    
-    // Instantiate TransformNodes to manifest movement of forms
     const waveForms = [
         {current: 0, limit: 12, peaked: false},
         {current: 0, limit: 13, peaked: false},
@@ -96,7 +88,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // TargetCamera and sphere shapes produce the pseudo-2D top-down view of circles
         const eye = new BABYLON.TargetCamera('eye', new BABYLON.Vector3(0, 36, 0), scene)
-        eye.setTarget(new BABYLON.Vector3(15, -720, 0))
+        eye.setTarget(new BABYLON.Vector3(MODS.RAD(90), -720, 0))
+
+        // Configure orthographic view
+        eye.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA
+        const viewDistance = 37
+        const aspectRatio = mField.height / mField.width
+        const lrFactor = 2 
+        eye.orthoLeft = -viewDistance / lrFactor;
+        eye.orthoRight = viewDistance / lrFactor;
+        eye.orthoBottom = eye.orthoLeft * aspectRatio;
+        eye.orthoTop = eye.orthoRight * aspectRatio;
 
         // Generate Protoglyphics (if needed)
 
@@ -129,21 +131,28 @@ window.addEventListener('DOMContentLoaded', () => {
         
         let theThiccness = 0.22
 
-        // Akali Atet Toreus - Black / Death
+        // Akali Atet Toreus - Black / Death ::: n is for nULL
         // const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus1', TOREUS(waveForms[0].current, theThiccness), scene)
         const nToreus1 = new Toreus(waveForms[0].current, theThiccness, 0, 'nToreus1', scene)
         const nToreus2 = new Toreus(waveForms[0].current, theThiccness, 0, 'nToreus2', scene)
-        nToreus1.y(0)
-        nToreus2.y(0)
-        nToreus1.x(XPOS_1)
-        nToreus2.x(XPOS_2)
+        if (waveForms[0].peaked) {
+            nToreus1.kill()
+            nToreus2.kill()
+        } else {
+            nToreus1.y(0)
+            nToreus2.y(0)
+            nToreus1.x(XPOS_1)
+            nToreus2.x(XPOS_2)
+            nToreus1.rotate(0, 0, 0)
+            nToreus2.rotate(0, 0, 0)
+            nToreus2.matter(black)
+            nToreus1.matter(black)
+        }
         // Figure out what these do and how to make them work
         // nToreus2.outlineColor = new BABYLON.Color3(1, 1, 1)
         // nToreus2.outlineWidth = 1
         // overlayAlpha: 0.5
         // overlayColor: {…}
-        nToreus2.matter(black)
-        nToreus1.matter(black) // n is for nULL
 
         // Akosh Atet Toreus - White / Life ::: g is for gAIA
         const gToreus1 = new Toreus(waveForms[1].current, theThiccness, 0, 'gToreus1', scene)
@@ -156,6 +165,8 @@ window.addEventListener('DOMContentLoaded', () => {
             gToreus2.y(0.01)
             gToreus1.x(MODS.DOPPLER+XPOS_1)
             gToreus2.x(MODS.DOPPLER+XPOS_2)
+            gToreus1.rotate(0, 0, 0)
+            gToreus2.rotate(0, 0, 0)
             gToreus1.matter(white)
             gToreus2.matter(white)
         }
@@ -171,6 +182,8 @@ window.addEventListener('DOMContentLoaded', () => {
             mToreus2.y(-0.01)
             mToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
             mToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+            mToreus1.rotate(0, 0, 0)
+            mToreus2.rotate(0, 0, 0)
             mToreus2.matter(yellow)
             mToreus1.matter(yellow)
         }
@@ -186,6 +199,8 @@ window.addEventListener('DOMContentLoaded', () => {
             aToreus2.y(-0.02)
             aToreus1.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
             aToreus2.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+            aToreus1.rotate(0, 0, 0)
+            aToreus2.rotate(0, 0, 0)
             aToreus2.matter(blue)
             aToreus1.matter(blue)
         }
@@ -201,6 +216,8 @@ window.addEventListener('DOMContentLoaded', () => {
             zToreus2.y(-0.03)
             zToreus1.x(-MODS.DOPPLER+XPOS_1)
             zToreus2.x(-MODS.DOPPLER+XPOS_2)
+            zToreus1.rotate(0, 0, 0)
+            zToreus2.rotate(0, 0, 0)
             zToreus2.matter(teal)
             zToreus1.matter(teal)
         }
@@ -216,6 +233,8 @@ window.addEventListener('DOMContentLoaded', () => {
             pToreus2.y(-0.04)
             pToreus1.x(MODS.DOPPLER+XPOS_1)
             pToreus2.x(MODS.DOPPLER+XPOS_2)
+            pToreus1.rotate(0, 0, 0)
+            pToreus2.rotate(0, 0, 0)
             pToreus2.matter(magenta)
             pToreus1.matter(magenta)
         }
@@ -231,6 +250,8 @@ window.addEventListener('DOMContentLoaded', () => {
             oToreus2.y(-0.05)
             oToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
             oToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+            oToreus1.rotate(0, 0, 0)
+            oToreus2.rotate(0, 0, 0)
             oToreus2.matter(purple)
             oToreus1.matter(purple)
         }
@@ -258,11 +279,9 @@ window.addEventListener('DOMContentLoaded', () => {
     engine.runRenderLoop(() => {
         // --- Transmutations --- \\
         // Spin|Energy
-        const ROTVAL = Math.PI
-        const ENTROPY = 1.618
-        // alphaRot -= (ROTVAL / ENTROPY)
-        // betaRot -= (ROTVAL / ENTROPY)
-        // gammaRot -= (ROTVAL / ENTROPY)
+        // alphaRotation += spinRate
+        // betaRotation += spinRate
+        // gammaRotation += spinRate
 
         // Expansion|Contraction
         waveForms.forEach(wave => {
