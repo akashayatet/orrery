@@ -1,3 +1,4 @@
+import Toreus from "./classes/Toreus.js";
 import Modifiers from "./util/Modifiers.js"
 
 
@@ -41,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const TOREUS = (diame, thicc, tessells) => {
         const TOREUS_GEO = {
             diameter: new Modifiers().OMEGA_DIA + (diame ? diame : 0),
-            thickness: (new Modifiers().RAD(new Modifiers().OMEGA_DIA)*12) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
+            thickness: (new Modifiers().RAD(new Modifiers().OMEGA_DIA)*new Modifiers().TOREUS_T) + (thicc ? thicc : 0),    /* Should equally match Rayarc bandwidths */
             tessellation: new Modifiers().TOREUS_T + (tessells ? tessells : 0)/* Tesselations will also affect color depth */
         }
         return TOREUS_GEO
@@ -139,14 +140,22 @@ window.addEventListener('DOMContentLoaded', () => {
         let theThiccness = 0.22
 
         // Akali Atet Toreus - Black / Death
-        const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus1', TOREUS(waveForms[0].current, theThiccness), scene)
-        const nToreus2 = BABYLON.MeshBuilder.CreateTorus('nToreus2', TOREUS(waveForms[0].current, theThiccness), scene)
-        nToreus1.position.y = MODS.Y_ROOT+0
-        nToreus2.position.y = MODS.Y_ROOT+0
-        nToreus1.position.x = MODS.X_ROOT+XPOS_1
-        nToreus2.position.x = MODS.X_ROOT+XPOS_2
-        nToreus2.material = black
-        nToreus1.material = black // n is for nULL
+        // const nToreus1 = BABYLON.MeshBuilder.CreateTorus('nToreus1', TOREUS(waveForms[0].current, theThiccness), scene)
+        const nToreus1 = new Toreus(waveForms[0].current, theThiccness, 0, 'nToreus1', scene)
+        const nToreus2 = new Toreus(waveForms[0].current, theThiccness, 0, 'nToreus2', scene)
+        nToreus1.y(0)
+        nToreus2.y(0)
+        nToreus1.x(XPOS_1)
+        nToreus2.x(XPOS_2)
+
+        // Figure out what these do and how to make them work
+        // nToreus2.outlineColor = new BABYLON.Color3(1, 1, 1)
+        // nToreus2.outlineWidth = 1
+        // overlayAlpha: 0.5
+        // overlayColor: {…}
+
+        nToreus2.matter(black)
+        nToreus1.matter(black) // n is for nULL
 
         // Akosh Atet Toreus - White / Life
         const gToreus1 = BABYLON.MeshBuilder.CreateTorus('gToreus1', TOREUS(waveForms[1].current, theThiccness), scene)

@@ -8,33 +8,36 @@ class Toreus {
     _mesh;
     _scene;
     _geometry = {
-        diameter,
-        thickness,
-        tessellation
+        diameter: 0,
+        thickness: 0,
+        tessellation: 0
     }
 
     // methods
     getMesh = () => {
+        console.debug('old mesh', this._mesh)
         /* To avoid duplicates, should check this._scene for an instance of this._name 
          * and dispose of that before creating a new one. Once I can figure out how to search by name.
          * This can also be leveraged to avoid having to create a new mesh every time getMesh() is called.
          */
         let newMesh = BABYLON.MeshBuilder.CreateTorus(this.name, this._geometry, this._scene)
-        if (this._mesh == undefined || this._mesh !== newMesh) {/* absolute equals necessary here */
+        if (!this._mesh || this._mesh !== newMesh) {/* absolute equals necessary here */
             // Purge old mesh from memory & replace it
-            this._mesh.dispose()
+            this.mesh && this._mesh.dispose()
             this._mesh = newMesh
         } else {
             // Discard new mesh
             newMesh.dispose()
         }
+        console.debug('new mesh', this._mesh)
         return this._mesh
     }
 
-    rotate = (orientation) => {} 
-    x = (newX) => {this._mesh.position.x = Modifiers.X_ROOT + newX}
-    y = (newY) => {this._mesh.position.y = Modifiers.Y_ROOT + newY}
-    z = (newZ) => {this._}
+    rotate = (orientation) => {/* TODO: Build alpha, beta, and gamma rotators */}
+    
+    x = (newX) => {this._mesh.position.x = new Modifiers().X_ROOT + newX}
+    y = (newY) => {this._mesh.position.y = new Modifiers().Y_ROOT + newY}
+    z = (newZ) => {this._mesh.position.z = new Modifiers().Z_ROOT + newZ}
 
     kill = () => {this._mesh.dispose()}
     duplicate = (newName, newScene) => {return new Toreus(this.diameter, this.thickness, this.tesselation, newName, newScene)}
@@ -49,7 +52,7 @@ class Toreus {
     updateDiameter = (newDiameter) => {this._geometry.diameter = newDiameter}
     updateThickness = (newThickness) => {this._geometry.thickness = newThickness}
     updateTessellations = (newTessellation) => {this._geometry.tessellation = newTessellation}
-    
+    matter = (meshMaterial) => {this._mesh.material = meshMaterial}
 
     constructor (diameter, thickness, tessellation, tName, targetScene) {
         this.name = tName
@@ -58,11 +61,11 @@ class Toreus {
         let baseDiameter = MODS.OMEGA_DIA
         this._geometry = {
             diameter: baseDiameter + (diameter ? diameter : 0),
-            thickness: MODS.RAD(baseDiameter) * (thickness ? thickness : 0),
+            thickness: (MODS.RAD(baseDiameter) * MODS.TOREUS_T) + (thickness ? thickness : 0),
             tessellation: MODS.TOREUS_T + (tessellation ? tessellation : 0)
             // NOTE: Tessellation also impacts color depth
         }
-        return this.getMesh()
+        this.getMesh()
     }
 }
 export default Toreus
