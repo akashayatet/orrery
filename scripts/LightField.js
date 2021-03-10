@@ -147,13 +147,11 @@ window.addEventListener('DOMContentLoaded', () => {
         nToreus2.y(0)
         nToreus1.x(XPOS_1)
         nToreus2.x(XPOS_2)
-
         // Figure out what these do and how to make them work
         // nToreus2.outlineColor = new BABYLON.Color3(1, 1, 1)
         // nToreus2.outlineWidth = 1
         // overlayAlpha: 0.5
         // overlayColor: {…}
-
         nToreus2.matter(black)
         nToreus1.matter(black) // n is for nULL
 
