@@ -31,8 +31,7 @@ class Toreus {
         return this._mesh
     }
 
-    rotate = (orientation) => {/* TODO: Build alpha, beta, and gamma rotators */}
-    
+    rotate = (alpha, beta, gamma) => {this._mesh.rotation = new BABYLON.Vector3(alpha, beta, gamma)}
     x = (newX) => {this._mesh.position.x = new Modifiers().X_ROOT + newX}
     y = (newY) => {this._mesh.position.y = new Modifiers().Y_ROOT + newY}
     z = (newZ) => {this._mesh.position.z = new Modifiers().Z_ROOT + newZ}
