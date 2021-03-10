@@ -15,7 +15,6 @@ class Toreus {
 
     // methods
     getMesh = () => {
-        console.debug('old mesh', this._mesh)
         /* To avoid duplicates, should check this._scene for an instance of this._name 
          * and dispose of that before creating a new one. Once I can figure out how to search by name.
          * This can also be leveraged to avoid having to create a new mesh every time getMesh() is called.
@@ -29,7 +28,6 @@ class Toreus {
             // Discard new mesh
             newMesh.dispose()
         }
-        console.debug('new mesh', this._mesh)
         return this._mesh
     }
 

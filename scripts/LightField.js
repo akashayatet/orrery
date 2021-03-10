@@ -73,11 +73,11 @@ window.addEventListener('DOMContentLoaded', () => {
     // Instantiate TransformNodes to manifest movement of forms
     const waveForms = [
         {current: 0, limit: 12, peaked: false},
-        {current: 13, limit: 13, peaked: false},
+        {current: 0, limit: 13, peaked: false},
         {current: 0, limit: 14, peaked: false},
-        {current: 15, limit: 15, peaked: false},
+        {current: 0, limit: 15, peaked: false},
         {current: 0, limit: 16, peaked: false},
-        {current: 17, limit: 17, peaked: false},
+        {current: 0, limit: 17, peaked: false},
         {current: 0, limit: 18, peaked: false}
     ]
     // --- Oscillation Tuning  & Experiments --- \\
@@ -145,69 +145,97 @@ window.addEventListener('DOMContentLoaded', () => {
         nToreus2.matter(black)
         nToreus1.matter(black) // n is for nULL
 
-        // Akosh Atet Toreus - White / Life
+        // Akosh Atet Toreus - White / Life ::: g is for gAIA
         const gToreus1 = new Toreus(waveForms[1].current, theThiccness, 0, 'gToreus1', scene)
         const gToreus2 = new Toreus(waveForms[1].current, theThiccness, 0, 'gToreus2', scene)
-        gToreus1.y(0.01)
-        gToreus2.y(0.01)
-        gToreus1.x(MODS.DOPPLER+XPOS_1)
-        gToreus2.x(MODS.DOPPLER+XPOS_2)
-        gToreus2.matter(white)
-        gToreus1.matter(white) // g is for gAIA
+        if (waveForms[1].peaked) {
+            gToreus1.kill()
+            gToreus2.kill()
+        } else {
+            gToreus1.y(0.01)
+            gToreus2.y(0.01)
+            gToreus1.x(MODS.DOPPLER+XPOS_1)
+            gToreus2.x(MODS.DOPPLER+XPOS_2)
+            gToreus1.matter(white)
+            gToreus2.matter(white)
+        }
 
-        // Aura Atet Toreus - Yellow / Air / Subliminal
+        // Aura Atet Toreus - Yellow / Air / Subliminal ::: m is for mAIA
         const mToreus1 = new Toreus(waveForms[2].current, theThiccness, 0, 'mToreus1', scene)
         const mToreus2 = new Toreus(waveForms[2].current, theThiccness, 0, 'mToreus2', scene)
-        mToreus1.y(-0.01)
-        mToreus2.y(-0.01)
-        mToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
-        mToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
-        mToreus2.matter(yellow)
-        mToreus1.matter(yellow) // m is for mAIA
+        if (waveForms[2].peaked) {
+            mToreus1.kill()
+            mToreus2.kill()
+        } else {
+            mToreus1.y(-0.01)
+            mToreus2.y(-0.01)
+            mToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
+            mToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+            mToreus2.matter(yellow)
+            mToreus1.matter(yellow)
+        }
 
-        // Cryo Atet Toreus - Blue / Water / Darkness
+        // Cryo Atet Toreus - Blue / Water / Darkness ::: a is for aBYSS
         const aToreus1 = new Toreus(waveForms[3].current, theThiccness, 0, 'aToreus1', scene)
         const aToreus2 = new Toreus(waveForms[3].current, theThiccness, 0, 'aToreus2', scene)
-        aToreus1.y(-0.02)
-        aToreus2.y(-0.02)
-        aToreus1.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
-        aToreus2.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
-        aToreus2.matter(blue)
-        aToreus1.matter(blue) // a is for aBYSS
+        if (waveForms[3].peaked) {
+            aToreus1.kill()
+            aToreus2.kill()
+        } else {
+            aToreus1.y(-0.02)
+            aToreus2.y(-0.02)
+            aToreus1.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
+            aToreus2.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+            aToreus2.matter(blue)
+            aToreus1.matter(blue)
+        }
 
-        // Zero Atet Toreus - Teal / Vaccuum / Plenum
+        // Zero Atet Toreus - Teal / Vaccuum / Plenum ::: z is for zERO-POINT
         const zToreus1 = new Toreus(waveForms[4].current, theThiccness, 0, 'zToreus1', scene)
         const zToreus2 = new Toreus(waveForms[4].current, theThiccness, 0, 'zToreus2', scene)
-        zToreus1.y(-0.03)
-        zToreus2.y(-0.03)
-        zToreus1.x(-MODS.DOPPLER+XPOS_1)
-        zToreus2.x(-MODS.DOPPLER+XPOS_2)
-        zToreus2.matter(teal)
-        zToreus1.matter(teal) // z is for zERO-POINT
+        if (waveForms[4].peaked) {
+            zToreus1.kill()
+            zToreus2.kill()
+        } else {
+            zToreus1.y(-0.03)
+            zToreus2.y(-0.03)
+            zToreus1.x(-MODS.DOPPLER+XPOS_1)
+            zToreus2.x(-MODS.DOPPLER+XPOS_2)
+            zToreus2.matter(teal)
+            zToreus1.matter(teal)
+        }
 
-        // Pyro Atet Toreus - Magenta / Fire / Light
+        // Pyro Atet Toreus - Magenta / Fire / Light ::: p is for pLASMA
         const pToreus1 = new Toreus(waveForms[5].current, theThiccness, 0, 'pToreus1', scene)
         const pToreus2 = new Toreus(waveForms[5].current, theThiccness, 0, 'pToreus2', scene)
-        pToreus1.y(-0.04)
-        pToreus2.y(-0.04)
-        pToreus1.x(MODS.DOPPLER+XPOS_1)
-        pToreus2.x(MODS.DOPPLER+XPOS_2)
-        pToreus2.matter(magenta)
-        pToreus1.matter(magenta) // p is for pLASMA
+        if (waveForms[5].peaked) {
+            pToreus1.kill()
+            pToreus2.kill()
+        } else {
+            pToreus1.y(-0.04)
+            pToreus2.y(-0.04)
+            pToreus1.x(MODS.DOPPLER+XPOS_1)
+            pToreus2.x(MODS.DOPPLER+XPOS_2)
+            pToreus2.matter(magenta)
+            pToreus1.matter(magenta)
+        }
 
-        // Zon Atet Toreus - Purple / Chaos / Transmutation             -- Synchro --
+        // Zon Atet Toreus - Purple / Chaos / Transmutation ::: o is for oMEGA
         const oToreus1 = new Toreus(waveForms[6].current, theThiccness, 0, 'oToreus1', scene)
         const oToreus2 = new Toreus(waveForms[6].current, theThiccness, 0, 'oToreus2', scene)
-        oToreus1.y(-0.05)
-        oToreus2.y(-0.05)
-        oToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
-        oToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
-        oToreus2.matter(purple)
-        oToreus1.matter(purple) // o is for oMEGA
+        if (waveForms[6].peaked) {
+            oToreus1.kill()
+            oToreus2.kill()
+        } else {
+            oToreus1.y(-0.05)
+            oToreus2.y(-0.05)
+            oToreus1.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
+            oToreus2.x((MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
+            oToreus2.matter(purple)
+            oToreus1.matter(purple)
+        }
 
-        // NOTE: No more than one sphera may be present in the core of a being
         // Akali Sphera
-
         // Akosh Atet Sphera - White / Life
         const gSphera1 = BABYLON.MeshBuilder.CreateSphere('gSphera', SPHERA_GEO, scene)
         const gSphera2 = BABYLON.MeshBuilder.CreateSphere('gSphera', SPHERA_GEO, scene)
@@ -217,7 +245,6 @@ window.addEventListener('DOMContentLoaded', () => {
         gSphera2.position.x = MODS.X_ROOT+XPOS_2
         gSphera2.material = white
         gSphera1.material = white // g is for gAIA
-
         // Zon Sphera
         // Akali Rayarc
         // Akosh Rayarc
@@ -241,10 +268,9 @@ window.addEventListener('DOMContentLoaded', () => {
         waveForms.forEach(wave => {
             if (!(wave.current >= wave.limit) && !wave.peaked) {
                 wave.current += rateOfChange
-            } else if (wave.peaked && wave.current > 0) {
-                wave.current -= rateOfChange
             } else {
-                wave.peaked = !(wave.current <= 0)
+                wave.current = 0
+                wave.peaked = false
             }
         })
         
