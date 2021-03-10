@@ -178,22 +178,22 @@ window.addEventListener('DOMContentLoaded', () => {
         // Cryo Atet Toreus - Blue / Water / Darkness
         const aToreus1 = new Toreus(waveForms[3].current, theThiccness, 0, 'aToreus1', scene)
         const aToreus2 = new Toreus(waveForms[3].current, theThiccness, 0, 'aToreus2', scene)
-        aToreus1.y(0.02)
-        aToreus2.y(0.02)
+        aToreus1.y(-0.02)
+        aToreus2.y(-0.02)
         aToreus1.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_1)
         aToreus2.x(-(MODS.DOPPLER+MODS.DOPPLER)+XPOS_2)
         aToreus2.matter(blue)
         aToreus1.matter(blue) // a is for aBYSS
 
         // Zero Atet Toreus - Teal / Vaccuum / Plenum
-        const zToreus2 = BABYLON.MeshBuilder.CreateTorus('cToreus2', TOREUS(waveForms[4].current, theThiccness), scene)
-        const zToreus1 = BABYLON.MeshBuilder.CreateTorus('cToreus1', TOREUS(waveForms[4].current, theThiccness), scene)
-        zToreus1.position.y = MODS.Y_ROOT-0.03
-        zToreus2.position.y = MODS.Y_ROOT-0.03
-        zToreus1.position.x = MODS.X_ROOT-MODS.DOPPLER+XPOS_1
-        zToreus2.position.x = MODS.X_ROOT-MODS.DOPPLER+XPOS_2
-        zToreus2.material = teal
-        zToreus1.material = teal // z is for zERO-POINT
+        const zToreus1 = new Toreus(waveForms[4].current, theThiccness, 0, 'zToreus1', scene)
+        const zToreus2 = new Toreus(waveForms[4].current, theThiccness, 0, 'zToreus2', scene)
+        zToreus1.y(-0.03)
+        zToreus2.y(-0.03)
+        zToreus1.x(-MODS.DOPPLER+XPOS_1)
+        zToreus2.x(-MODS.DOPPLER+XPOS_2)
+        zToreus2.matter(teal)
+        zToreus1.matter(teal) // z is for zERO-POINT
 
         // Pyro Atet Toreus - Magenta / Fire / Light
         const pToreus1 = BABYLON.MeshBuilder.CreateTorus('pToreus1', TOREUS(waveForms[5].current, theThiccness), scene)
